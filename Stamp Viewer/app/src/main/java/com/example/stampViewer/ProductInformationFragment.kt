@@ -1,14 +1,19 @@
 package com.example.stampViewer
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.stampViewer.data.CommentData
 import com.example.stampViewer.data.StampData
+import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.android.synthetic.main.product_info.*
 import kotlinx.android.synthetic.main.product_info.stampPhotoMain
 
@@ -24,6 +29,7 @@ class ProductInformationFragment : Fragment() {
         return inflater.inflate(R.layout.product_info, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -47,6 +53,17 @@ class ProductInformationFragment : Fragment() {
                     putString("latest_checked", "Last checked: " + stamp.name)
                 }.apply()
             }
+        }
+
+//        val comments = CommentData().allComments().filter {
+//            it.stampCode == stampCode
+//        }
+
+        val comments = CommentData().allComments()
+
+        commentRecyclerView.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = CommentsAdapter(comments)
         }
 
 
