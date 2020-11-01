@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="15dp">
-<!--    ?attr/actionBarSize-->
+    <!--    ?attr/actionBarSize-->
 
 
     <RelativeLayout
@@ -14,11 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        app:layout_constraintBottom_toTopOf="@+id/userConn"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/userConn">
 
         <RelativeLayout
             android:id="@+id/userImg"
@@ -52,6 +51,14 @@
             android:layout_centerHorizontal="true"
             android:text="Address for test user"
             android:textSize="18sp" />
+<!--                <TextView-->
+<!--                    android:id="@+id/test"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@+id/userAddr"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:text="Address for test user"-->
+<!--                    android:textSize="18sp" />-->
 
     </RelativeLayout>
 
@@ -60,10 +67,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="@+id/userHeader"
-        app:layout_constraintEnd_toEndOf="@+id/userHeader"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintBottom_toBottomOf="@+id/userInfo"
+        app:layout_constraintTop_toTopOf="@+id/userHeader">
 
         <!--    Followers-->
         <RelativeLayout
@@ -120,21 +129,82 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/userInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        app:layout_constraintStart_toStartOf="@+id/userConn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/userConn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userConn">
 
-        <TextView
-            android:id="@+id/userEmail"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="email adddress"
-            android:textSize="25sp" />
+            android:orientation="vertical"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textSize="13sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="testuseremailaddress@gmail.com"
+                android:textSize="18sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"/>
+        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phone"
+                    android:textSize="13sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="123-4356-7890"
+                    android:textSize="18sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Facebook"
+                    android:textSize="13sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Test_User_FB"
+                    android:textSize="18sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
 
     </RelativeLayout>
 
