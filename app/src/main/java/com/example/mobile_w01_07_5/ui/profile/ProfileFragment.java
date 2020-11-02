@@ -40,23 +40,30 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-
+        mStorageRef = FirebaseStorage.getInstance().getReference();
         StorageReference childRef=mStorageRef.child("images/cat.jpg");
-        childRef.getBytes(1024*1024).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+        childRef.getBytes(1024*1024*30).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
             public void onSuccess(byte[] bytes) {
                 Bitmap bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-//                img =
-//
-////                findViewById(R.id.imageView);
-////                imageView.setImageBitmap();
-//
-//                .setImageBitmap(bitmap);
+                img = img.findViewById(R.id.userImg);
+                img.setImageBitmap(bitmap);
             }
         });
-
-
-
         return root;
     }
+
+//    @Override
+//    public void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        StorageReference childRef=mStorageRef.child("images/cat.jpg");
+//        childRef.getBytes(1024*1024).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+//            @Override
+//            public void onSuccess(byte[] bytes) {
+//                Bitmap bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+//                img = img.findViewById(R.id.userImg);
+//                img.setImageBitmap(bitmap);
+//            }
+//        });
+//    }
 }
