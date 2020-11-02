@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "Mobile_W01_07_5"
+rootProject.name = "Stamp Map"
