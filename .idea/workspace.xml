@@ -11,78 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="563cca25-08fa-4159-a871-a40238a78c5d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/.idea/dictionaries/matth.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/proguard-rules.pro" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/androidTest/java/com/example/stampViewer/ExampleInstrumentedTest.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/java/com/example/stampViewer/CommentsAdapter.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/java/com/example/stampViewer/FirstFragment.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/java/com/example/stampViewer/MainActivity.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/java/com/example/stampViewer/PostDetailActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/java/com/example/stampViewer/ProductInformationFragment.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/java/com/example/stampViewer/SecondFragment.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/java/com/example/stampViewer/StampsAdapter.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/java/com/example/stampViewer/data/CommentData.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/java/com/example/stampViewer/data/CommentItem.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/java/com/example/stampViewer/data/StampData.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/java/com/example/stampViewer/data/StampItem.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/drawable/fresh_salad.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/drawable/highly_rated.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/drawable/ic_baseline_attach_money_24.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/drawable/msu_museum.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/drawable/ucberkeley.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/drawable/yosemite.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/drawable/yosemite1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/layout/a_single_restaurant_row.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/layout/content_main.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/layout/fragment_first.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/layout/fragment_second.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/layout/product_info.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/layout/row_comment.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/menu/menu_main.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/navigation/nav_graph.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/values/colors.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/values/dimens.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/values/strings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/main/res/values/styles.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/app/src/test/java/com/example/stampViewer/ExampleUnitTest.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/gradle.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stamp Viewer/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/stampViewer/ProductInformationFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/stampViewer/ProductInformationFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/product_info.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/product_info.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

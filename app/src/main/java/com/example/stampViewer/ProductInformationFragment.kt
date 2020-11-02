@@ -3,19 +3,17 @@ package com.example.stampViewer
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.stampViewer.data.CommentData
 import com.example.stampViewer.data.StampData
-import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.android.synthetic.main.product_info.*
-import kotlinx.android.synthetic.main.product_info.stampPhotoMain
 
 class ProductInformationFragment : Fragment() {
 
@@ -42,7 +40,12 @@ class ProductInformationFragment : Fragment() {
         if (stamp != null) {
             productTitle.text = stamp.name
             productInfoDescription.text = stamp.description
-            stampPhotoMain.setImageDrawable(ContextCompat.getDrawable(requireActivity(), stamp.photo))
+            stampPhotoMain.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireActivity(),
+                    stamp.photo
+                )
+            )
 
 
             checkUserProfileButton.setOnClickListener {
