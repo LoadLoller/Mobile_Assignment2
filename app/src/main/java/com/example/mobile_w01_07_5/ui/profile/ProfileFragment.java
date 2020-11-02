@@ -1,9 +1,13 @@
 package com.example.mobile_w01_07_5.ui.profile;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,10 +17,15 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.mobile_w01_07_5.R;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class ProfileFragment extends Fragment {
 
     private ProfileViewModel profileViewModel;
+    private StorageReference mStorageRef;
+    private ImageView img;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +39,24 @@ public class ProfileFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+
+        StorageReference childRef=mStorageRef.child("images/cat.jpg");
+        childRef.getBytes(1024*1024).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                Bitmap bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+//                img =
+//
+////                findViewById(R.id.imageView);
+////                imageView.setImageBitmap();
+//
+//                .setImageBitmap(bitmap);
+            }
+        });
+
+
+
         return root;
     }
 }
