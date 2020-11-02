@@ -45,9 +45,9 @@ public class ProfileFragment extends Fragment {
         childRef.getBytes(1024*1024*30).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
             public void onSuccess(byte[] bytes) {
-                Bitmap bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-                img = img.findViewById(R.id.userImg);
-                img.setImageBitmap(bitmap);
+//                Bitmap bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+//                img = img.findViewById(R.id.userImg);
+//                img.setImageBitmap(bitmap);
             }
         });
         return root;
