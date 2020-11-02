@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Stamp_Viewer.iml" filepath="$PROJECT_DIR$/.idea/modules/Stamp_Viewer.iml" group="Stamp_Viewer" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="Stamp Viewer/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Mobile_W01_07_5.iml" filepath="$PROJECT_DIR$/.idea/modules/Mobile_W01_07_5.iml" group="Mobile_W01_07_5" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="Mobile_W01_07_5/app" />
     </modules>
   </component>
 </project>
