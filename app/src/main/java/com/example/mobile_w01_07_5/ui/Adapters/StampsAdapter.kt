@@ -32,10 +32,10 @@ class StampsAdapter(private val stampItem: List<StampItem>) :
         fun bind(stampItem: StampItem) {
             itemView.stampItemTitle.text = stampItem.name
 //            itemView.foodPrice.text = foodItem.price.toString()
-            itemView.stampRate.text = "Rate: ${stampItem.rate}"
-            if (stampItem.isHighlyRated) {
-                itemView.highlyRatedIcon.visibility = View.VISIBLE
-            }
+//            itemView.stampRate.text = "Rate: ${stampItem.rate}"
+//            if (stampItem.isHighlyRated) {
+//                itemView.highlyRatedIcon.visibility = View.VISIBLE
+//            }
 
             view.stampPhotoMain.setImageResource(stampItem.photo)
 
