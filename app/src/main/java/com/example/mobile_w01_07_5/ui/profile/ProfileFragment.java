@@ -18,6 +18,10 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.mobile_w01_07_5.R;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -26,6 +30,7 @@ public class ProfileFragment extends Fragment {
     private ProfileViewModel profileViewModel;
     private StorageReference mStorageRef;
     private ImageView img;
+    private DatabaseReference reference;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -40,6 +45,8 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+
+//        todo: remove after testing
         mStorageRef = FirebaseStorage.getInstance().getReference();
         StorageReference childRef=mStorageRef.child("images/cat.jpg");
         childRef.getBytes(1024*1024*30).addOnSuccessListener(new OnSuccessListener<byte[]>() {
@@ -50,20 +57,21 @@ public class ProfileFragment extends Fragment {
                 img.setImageBitmap(bitmap);
             }
         });
+
+        reference = FirebaseDatabase.getInstance().getReference().child("Users").child("user");
+
+        TextView userName = root.findViewById(R.id.userName);
+        TextView userAddr = root.findViewById(R.id.userAddr);
+
+
+
         return root;
     }
 
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        StorageReference childRef=mStorageRef.child("images/cat.jpg");
-//        childRef.getBytes(1024*1024).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-//            @Override
-//            public void onSuccess(byte[] bytes) {
-//                Bitmap bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-//                img = img.findViewById(R.id.userImg);
-//                img.setImageBitmap(bitmap);
-//            }
-//        });
-//    }
+    public void onDataChange(@NonNull DataSnapshot dataSnapshot){
+        if (dataSnapshot.exists()){
+            String email = dataSnapshot.child("user").child("email").getValue(String.class);
+        }
+    }
+
 }
