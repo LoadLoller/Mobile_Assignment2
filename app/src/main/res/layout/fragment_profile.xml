@@ -52,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-
+        android:padding="@dimen/activity_horizontal_margin"
         app:layout_constraintTop_toTopOf="@+id/userHeader">
 
         <!--    Followers-->
@@ -69,9 +69,9 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/userFollower"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="453K"
                     android:textSize="25sp" />
 
                 <TextView
@@ -95,9 +95,9 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/userFollowing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="300"
                     android:textSize="25sp" />
 
                 <TextView
@@ -152,9 +152,9 @@
                     android:text="Phone"
                     android:textSize="13sp" />
                 <TextView
+                    android:id="@+id/userPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="123-4356-7890"
                     android:textSize="18sp" />
                 <View
                     android:layout_width="match_parent"
@@ -171,9 +171,9 @@
                     android:text="Facebook"
                     android:textSize="13sp" />
                 <TextView
+                    android:id="@+id/userFb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Test_User_FB"
                     android:textSize="18sp" />
                 <View
                     android:layout_width="match_parent"
