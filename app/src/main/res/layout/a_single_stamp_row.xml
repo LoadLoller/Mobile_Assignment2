@@ -51,10 +51,12 @@
         android:layout_height="22dp"
         android:layout_marginEnd="300dp"
         android:layout_marginBottom="4dp"
+        android:layout_marginLeft="5dp"
         android:text="499"
         android:textColor="#2196F3"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/likeStampButton"
+        app:layout_constraintLeft_toRightOf="@id/likeStampButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/likeStampButton"
         app:layout_constraintVertical_bias="0.0" />
@@ -64,7 +66,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="268dp"
-        android:onClick="onClick"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.395"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,6 +79,7 @@
         android:layout_width="25dp"
         android:layout_height="22dp"
         android:layout_marginEnd="192dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginBottom="4dp"
         android:text="499"
         android:textColor="#2196F3"
@@ -99,5 +101,6 @@
         app:srcCompat="@drawable/ic_baseline_turned_in_24"
         app:tint="#2196F3"
         tools:ignore="VectorDrawableCompat" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
