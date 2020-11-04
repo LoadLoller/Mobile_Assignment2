@@ -9,10 +9,10 @@ import java.time.LocalDateTime
 class CommentData {
     @RequiresApi(Build.VERSION_CODES.O)
     fun allComments(): List<CommentItem> {
-//        var database = FirebaseDatabase.getInstance()
-//        var myRef = database.getReference("message")
-//
-//        myRef.setValue("Hello World!")
+        var database = FirebaseDatabase.getInstance()
+        var myRef = database.getReference("message")
+
+        myRef.setValue("Hello World!")
 
         return listOf<CommentItem>(
                 CommentItem("TS", "sdfas", LocalDateTime.now(), "Yes I think so!"),
