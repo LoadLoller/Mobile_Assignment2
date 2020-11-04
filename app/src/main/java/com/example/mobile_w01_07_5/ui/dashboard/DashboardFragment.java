@@ -30,6 +30,7 @@ import android.os.Bundle;
 
 import com.example.mobile_w01_07_5.data.StampData;
 import com.example.mobile_w01_07_5.data.StampItem;
+import com.example.mobile_w01_07_5.ui.Adapters.StampsAdapter;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -40,15 +41,24 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class DashboardFragment extends Fragment implements OnMapReadyCallback{
 
     private GoogleMap mMap;
     private MapView mMapView;
-    private List<StampItem> stampList;
+    private ArrayList<StampItem> stampList;
     private static final int LOCATION_REQUEST = 9158;
 
     @Override
@@ -63,7 +73,40 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback{
 
         MapsInitializer.initialize(getActivity().getApplicationContext());
 
-        stampList = new StampData().allStamps();
+        stampList = new ArrayList<StampItem>();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Stamps/stamp");
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Object> stampsList = (List<Object>)snapshot.getValue();
+
+                for (int i = 0; i < stampsList.size(); i++)
+                {
+                    HashMap<String, Object> stamp = (HashMap<String, Object>) stampsList.get(i);
+                    String stampID = stamp.get("stampID").toString();
+                    String userID = stamp.get("userID").toString();
+                    String name = stamp.get("name").toString();
+                    int rate = Integer.parseInt(stamp.get("rate").toString());
+                    String description = stamp.get("description").toString();
+                    double locationX = Double.parseDouble(stamp.get("locationX").toString());
+                    double locationY = Double.parseDouble(stamp.get("locationY").toString());
+                    String photo = stamp.get("photo").toString();
+                    boolean isHighlyRated = Boolean.parseBoolean(stamp.get("highlyRated").toString());
+                    StampItem item = new StampItem(stampID, userID, name, rate, description,
+                            locationX, locationY, photo, isHighlyRated);
+                    stampList.add(item);
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.print("wojuedebuxing" + error);
+            }
+        };
+
+        ref.addValueEventListener(postListener);
 
         mMapView.getMapAsync(this);
 
@@ -102,11 +145,11 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback{
         {
             StampItem stamp = stampList.get(i);
             LatLng stamp_pos = new LatLng(stamp.getLocationX(), stamp.getLocationY());
-            mMap.addMarker(new MarkerOptions()
+            Marker marker = mMap.addMarker(new MarkerOptions()
                     .position(stamp_pos)
                     .title(stamp.getName())
                     .snippet(stamp.getDescription()));
-
+            marker.setTag(stamp.getStampID());
         }
 
         //Add a marker at the user's current position based on GPS information
@@ -120,7 +163,9 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback{
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                // 跳转？
+                //jump to stamp info page
+                String stampID = (String) marker.getTag();
+
             }
         });
     }
