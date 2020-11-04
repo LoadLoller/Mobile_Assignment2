@@ -14,7 +14,6 @@ import com.example.mobile_w01_07_5.data.StampItem
 import com.example.mobile_w01_07_5.ui.Adapters.StampsAdapter
 import com.google.firebase.database.*
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -24,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class HomeFragment : Fragment() {
 
     private var Stamps = StampData()
-    var stampList : ArrayList<StampItem>? = null
+    var stampList: ArrayList<StampItem>? = null
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -34,20 +33,34 @@ class HomeFragment : Fragment() {
         var database = FirebaseDatabase.getInstance()
         var myRef = database.getReference("Stamps/stamp")
 
-        val gson = Gson()
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
-                val ds = dataSnapshot
-                val sType = object : TypeToken<List<StampItem>>() { }.type
-                val stamps = gson.fromJson<List<StampItem>>(ds.getValue().toString(), sType)
-//                Log.d("<<<<<<From HomeFragment", stamps.toString())
+                val stampsList = listOf(dataSnapshot.value)
+                val stamps = stampsList.first() as List<*>
 
+//                Log.d(">>>>>>>>>", stampsList.toString())
                 for (stamp in stamps) {
-                    stampList?.add(stamp)
-                    stampRecyclerView.adapter = StampsAdapter(stampList!!.toList())
+                    val s = stamp as HashMap<*, *>
+//                    for (stampItem in s.values) {
+//                        val currentStamp = stampItem as HashMap<*, *>
+                        val stampID = s.get("stampID").toString()
+                        val userID = s.get("userID").toString()
+                        val name = s.get("name").toString()
+                        val rate = s.get("rate").toString().toInt()
+                        val description = s.get("description").toString()
+                        val locationX = s.get("locationX").toString().toDouble()
+                        val locationY = s.get("locationY").toString().toDouble()
+                        val photo = s.get("photo").toString()
+                        val isHighlyRated = s.get("highlyRated").toString().toBoolean()
+                        val stampItem = StampItem(stampID, userID, name, rate, description,
+                                locationX, locationY, photo, isHighlyRated)
+                        stampList?.add(stampItem)
+//                    }
                 }
+                stampRecyclerView.adapter = StampsAdapter(stampList!!.toList())
             }
+
             override fun onCancelled(databaseError: DatabaseError) {
                 // Getting Post failed, log a message
                 Log.w("--------------------++", "loadPost:onCancelled", databaseError.toException())
@@ -67,7 +80,6 @@ class HomeFragment : Fragment() {
 //            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
 //        }
 
-//        Stamps.initialize()
         var stampItems = stampList
 
         stampRecyclerView.apply {

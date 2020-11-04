@@ -26,7 +26,7 @@ class StampData {
                 for (stamp in stamps) {
                     val jsonString = gson.fromJson(stamp.toString(), StampItem::class.java)
                     val currentStamp = StampItem(jsonString.stampID, jsonString.userID, jsonString.name,
-                            0.0, jsonString.description, jsonString.locationX,
+                            0, jsonString.description, jsonString.locationX,
                             jsonString.locationY)
 
                     stampList?.add(currentStamp)
@@ -44,32 +44,32 @@ class StampData {
 
 
 //        return stampList.plus(mockStamps)
-        Log.d("FFFFFFFFFFFFFFFFFFrom data FFFFF", stampList.toString())
         return stampList
     }
 
     fun update_to_database(mDatabase:FirebaseDatabase, mRef:DatabaseReference) {
         val gson = Gson()
         val mockStamps = listOf<StampItem>(
-                StampItem("TS", "", "Melbourne Square", 5.0, "Beautifulll", -17.123, 23.123),
+                StampItem("TS", "", "Melbourne Square", 5, "Beautifulll", -17.123, 23.123),
                 StampItem(
                         "VBP", "",
                         "MSU Museum",
-                        9.0,
+                        9,
                         "Really Beautifulll. This is the musemum from Michigan State University. I really like it!",
                         -17.123,
                         23.123,
                         photo = R.drawable.msu_museum.toString(),
                         isHighlyRated = true
                 ),
-                StampItem("VNB", "", "UCB", 9.0, "Beautifulll",
+                StampItem("VNB", "", "UCB", 9, "Beautifulll",
                         -17.123, 23.123, photo = R.drawable.ucberkeley.toString()),
-                StampItem("TS1", "", "Yosemite", 10.0, "Beautifulll",
+                StampItem("TS1", "", "Yosemite", 10, "Beautifulll",
                         -17.123, 23.123, photo = R.drawable.yosemite.toString(), isHighlyRated = true)
 //                StampItem("TS2", "sfa", "Melbourne Square", 5.0, "Beautifulll",
 //                        -17.123, 23.123)
         )
-        val jsonString = gson.toJson(mockStamps)
-        mRef.setValue(jsonString)
+//        val jsonString = gson.toJson(mockStamps)
+//        mRef.setValue(jsonString)
+        mRef.setValue(mockStamps)
     }
 }

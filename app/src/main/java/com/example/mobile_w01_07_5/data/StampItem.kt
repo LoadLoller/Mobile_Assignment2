@@ -8,7 +8,7 @@ data class StampItem(
     val stampID: String,
     val userID: String="",
     val name: String,
-    val rate: Double = 0.0,
+    val rate: Int = 0,
     val description: String,
     val locationX: Double,
     val locationY: Double,

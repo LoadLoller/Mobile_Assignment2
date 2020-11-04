@@ -40,23 +40,34 @@ class ProductInformationFragment : Fragment() {
         var database = FirebaseDatabase.getInstance()
         var myRef = database.getReference("Stamps/stamp")
 
-        val gson = Gson()
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
-                val ds = dataSnapshot
-                val sType = object : TypeToken<List<StampItem>>() { }.type
-                val stamps = gson.fromJson<List<StampItem>>(ds.getValue().toString(), sType)
-//                Log.d("<<<<<<From HomeFragment", stamps.toString())
+                val stampsList = listOf(dataSnapshot.value)
+                val stamps = stampsList.first() as List<*>
 
                 for (stamp in stamps) {
+//                    Log.d(">>>>>>>>>", stamp.toString())
+                    val s = stamp as HashMap<*, *>
+//                    for (stampItem in s.values) {
+//                        val currentStamp = stampItem as HashMap<*, *>
+                    val stampID = s.get("stampID").toString()
+                    val userID = s.get("userID").toString()
+                    val name = s.get("name").toString()
+                    val rate = s.get("rate").toString().toInt()
+                    val description = s.get("description").toString()
+                    val locationX = s.get("locationX").toString().toDouble()
+                    val locationY = s.get("locationY").toString().toDouble()
+                    val photo = s.get("photo").toString()
+                    val isHighlyRated = s.get("highlyRated").toString().toBoolean()
+                    val stampItem = StampItem(stampID, userID, name, rate, description,
+                            locationX, locationY, photo, isHighlyRated)
+                    stampList?.add(stampItem)
 
-                    stampList?.add(stamp)
-
-                    val stampID = args.productCodeArgument
+                    val stampViewID = args.productCodeArgument
 
                     val stamp = stampList?.toList()?.find {
-                        it.stampID == stampID
+                        it.stampID == stampViewID
                     }
 
                     if (stamp != null) {

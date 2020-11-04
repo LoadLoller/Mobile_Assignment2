@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mDatabaseReference= mDatabase.getReference("Stamps/stamp");
-        new StampData().update_to_database(mDatabase, mDatabaseReference);
+//        new StampData().update_to_database(mDatabase, mDatabaseReference);
     }
 
     @Override
