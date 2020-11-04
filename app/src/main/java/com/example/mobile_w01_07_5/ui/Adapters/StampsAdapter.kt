@@ -1,21 +1,17 @@
 package com.example.mobile_w01_07_5.ui.Adapters
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobile_w01_07_5.R
 import com.example.mobile_w01_07_5.data.StampItem
 import com.example.mobile_w01_07_5.ui.home.HomeFragment
 import com.example.mobile_w01_07_5.ui.home.HomeFragmentDirections
-import kotlinx.android.synthetic.main.a_single_stamp_row.*
 import kotlinx.android.synthetic.main.a_single_stamp_row.view.*
 
 class StampsAdapter(private val stampItem: List<StampItem>) :
-
     RecyclerView.Adapter<StampsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,10 +32,10 @@ class StampsAdapter(private val stampItem: List<StampItem>) :
         fun bind(stampItem: StampItem) {
             itemView.stampItemTitle.text = stampItem.name
 //            itemView.foodPrice.text = foodItem.price.toString()
-//            itemView.stampRate.text = "Rate: ${stampItem.rate}"
-//            if (stampItem.isHighlyRated) {
-//                itemView.highlyRatedIcon.visibility = View.VISIBLE
-//            }
+            itemView.stampRate.text = "Rate: ${stampItem.rate}"
+            if (stampItem.isHighlyRated) {
+                itemView.highlyRatedIcon.visibility = View.VISIBLE
+            }
 
             view.stampPhotoMain.setImageResource(stampItem.photo)
 
@@ -50,21 +46,6 @@ class StampsAdapter(private val stampItem: List<StampItem>) :
                 view.findNavController().navigate(action)
             }
 
-            // set like
-            view.likeStampButton.setOnClickListener{
-                println("test")
-            }
-            // add comment
-            view.commentButton.setOnClickListener{
-                println("test")
-            }
-
-            view.collection.setOnClickListener{
-                println("test")
-            }
-
         }
     }
-
-
 }

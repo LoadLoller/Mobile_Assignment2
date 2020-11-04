@@ -7,28 +7,26 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="555dp"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_height="match_parent"
         android:isScrollContainer="false"
-        tools:context=".ProductInformationFragment"
-        tools:layout_editor_absoluteY="24dp">
+        tools:context=".ProductInformationFragment">
 
         <TextView
             android:id="@+id/productTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:text="Melbourne Square"
             android:textColor="#000000"
-            android:textSize="24sp"
+            android:textSize="36sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/stampPhotoMain" />
 
         <ImageView
             android:id="@+id/stampPhotoMain"
-            android:layout_width="405dp"
-            android:layout_height="148dp"
+            android:layout_width="0dp"
+            android:layout_height="267dp"
             android:contentDescription="TODO"
             android:scaleType="centerCrop"
             android:src="@drawable/fresh_salad"
@@ -38,21 +36,19 @@
 
         <Button
             android:id="@+id/checkUserProfileButton"
-            android:layout_width="118dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:text="Check Profile"
-            android:textSize="12dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/stampPhotoMain" />
+            app:layout_constraintTop_toBottomOf="@+id/productTitle" />
 
         <TextView
             android:id="@+id/productInfoDescription"
-            android:layout_width="367dp"
-            android:layout_height="60dp"
+            android:layout_width="372dp"
+            android:layout_height="85dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:text="User's description"
             app:layout_constraintEnd_toEndOf="parent"
@@ -62,38 +58,34 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/commentRecyclerView"
-            android:layout_width="404dp"
-            android:layout_height="258dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/productInfoDescription"
             app:layout_constraintWidth_default="spread" />
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="67dp"
+            android:layout_height="63dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/commentRecyclerView"
             tools:src="@drawable/fresh_salad" />
 
         <EditText
             android:id="@+id/editComment"
-            android:layout_width="226dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Write Comment"
-            android:textSize="18dp"
             app:layout_constraintEnd_toStartOf="@+id/commentButton"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/commentRecyclerView" />
@@ -102,18 +94,11 @@
             android:id="@+id/commentButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
             android:text="Add"
             app:layout_constraintStart_toEndOf="@+id/editComment"
             app:layout_constraintTop_toBottomOf="@+id/commentRecyclerView" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="0dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

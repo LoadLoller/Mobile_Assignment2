@@ -10,7 +10,5 @@ data class StampItem(
     val description: String,
     val geo_location: String,
     val photo: Int = R.drawable.yosemite1,
-    val isHighlyRated: Boolean = false,
-    val likeCount : Int,
-    val ifMarked: Boolean = false
+    val isHighlyRated: Boolean = false
 )
