@@ -12,6 +12,7 @@ import com.example.mobile_w01_07_5.ui.home.HomeFragmentDirections
 import kotlinx.android.synthetic.main.a_single_stamp_row.view.*
 
 class StampsAdapter(private val stampItem: List<StampItem>) :
+
     RecyclerView.Adapter<StampsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -48,4 +49,6 @@ class StampsAdapter(private val stampItem: List<StampItem>) :
 
         }
     }
+
+
 }
