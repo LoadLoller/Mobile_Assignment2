@@ -8,6 +8,8 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -37,10 +41,15 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "Photo app";
     private static final int PICK_IMAGE_REQUEST = 111;
 
-    //private static final WindowManager.LayoutParams LOGGER = ;
 
+    //private static final WindowManager.LayoutParams LOGGER = ;
+    Photohelper photo= new Photohelper();
+    private double Latitude;
+    private double Longitude;
+    private String time;
     Button choosePhoto, uploadPhoto;
     ImageView imageView;
+    TextView textView;
     Uri filePath;
     private static final String CACHED_FILE_NAME ="cached_data";
 
@@ -53,9 +62,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
-        choosePhoto = (Button)findViewById(R.id.choosePhoto);
-        uploadPhoto = (Button)findViewById(R.id.uploadPhoto);
+        choosePhoto = findViewById(R.id.choosePhoto);
+        uploadPhoto = findViewById(R.id.uploadPhoto);
         imageView = findViewById(R.id.imageView);
+        textView=findViewById(R.id.DescriptionText);
 
         pd=new ProgressDialog(this);
         pd.setMessage("Uploading...");
@@ -78,7 +88,26 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(filePath!=null){
                     pd.show();
-                    StorageReference childRef=mStorageRef.child("images/cat3.jpg");
+                    String imageName=filePath.getPath();
+                    int index = imageName.lastIndexOf("/");
+                    imageName=imageName.substring(index+1);
+                    String desription = textView.getText().toString();
+                    photo.setDescription(desription);
+                    photo.setHighlyRelated(false);
+                    photo.setLatitude(Latitude);
+                    photo.setLongitude(Longitude);
+                    photo.setStampID(imageName);
+                    photo.setPhoto(imageName);
+                    photo.setUserID("");
+                    StorageReference childRef=mStorageRef.child("images/"+imageName);
+
+                    index = imageName.lastIndexOf(".");
+                    imageName=imageName.substring(0,index);
+                    photo.setName(imageName);
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference myRef = database.getReference("Stamps").child("stamp");
+                    DatabaseReference stampRef = myRef.child(imageName);
+                    stampRef.setValue(photo);
 
                     UploadTask uploadTask=childRef.putFile(filePath);
                     uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -100,15 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void switchBetweenActivities(){
-        Button switchButton = (Button) findViewById(R.id.Backbutton);
-        switchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //startActivity(new Intent(MainActivity.this,SwitchButton.class));
-            }
-        });
-    }
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
@@ -123,18 +144,39 @@ public class MainActivity extends AppCompatActivity {
                 cacheFile = File.createTempFile(CACHED_FILE_NAME, "", getCacheDir());
                 copy(filePath,cacheFile);
                 String cachePath = cacheFile.getAbsolutePath();
-
                 PhotoAttrsUtil.PictureAttrs photo = PhotoAttrsUtil.getPhotoAttrs(cachePath );
-                double latitude = photo.getLatitude();
-                double longitude=photo.getLongitude();
-                String time=photo.getTime();
+                Latitude=photo.getLatitude();
+                Longitude=photo.getLongitude();
+                int orientation=Integer.parseInt(photo.getOrientation());
+                int rotate = 0;
 
+                switch (orientation) {
+                    default:
+                        rotate=0;
+                        break;
+                    case ExifInterface.ORIENTATION_ROTATE_270:
+                        rotate = 270;
+                        break;
+                    case ExifInterface.ORIENTATION_ROTATE_180:
+                        rotate = 180;
+                        break;
+                    case ExifInterface.ORIENTATION_ROTATE_90:
+                        rotate = 90;
+                        break;
+                }
+
+                // time=photo.getTime();
 
                 Bitmap bitmap= MediaStore.Images.Media.getBitmap(getContentResolver(),filePath);
+                Matrix matrix = new Matrix();
+                matrix.setRotate(rotate);
+                // 重新绘制Bitmap
+                bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),bitmap.getHeight(), matrix, true);
+
 
                 imageView.setImageBitmap(bitmap);
-                TextView textView=(TextView)findViewById(R.id.photoAttribute);
-                textView.setText("latitude = "+latitude+"\n"+"longitude = "+longitude+"\n"+"time = "+time);
+                //TextView textView=(TextView)findViewById(R.id.photoAttribute);
+                //textView.setText("latitude = "+Latitude+"\n"+"longitude = "+Longitude+"\n"+"time = "+time);
 
 
             } catch (IOException e) {

@@ -83,7 +83,7 @@ public class PhotoAttrsUtil {
         LatLng latLng = new LatLng(getRationalLatLonToFloat(TAG_GPS_LATITUDE, TAG_GPS_LATITUDE_REF),
                 getRationalLatLonToFloat(TAG_GPS_LONGITUDE, TAG_GPS_LONGITUDE_REF));
 
-        return new PictureAttrs(TAG_DATETIME, TAG_MODEL, latLng.latitude, latLng.longitude, null);
+        return new PictureAttrs(TAG_DATETIME, TAG_MODEL,TAG_ORIENTATION, latLng.latitude, latLng.longitude, null);
     }
 
     //将经纬度String转换成double
@@ -119,13 +119,24 @@ public class PhotoAttrsUtil {
         private double latitude;//纬度
         private double longitude;//经度
         private String seaLevel;//海拔高度
+        private String orientation;
 
-        public PictureAttrs(String time, String model, double latitude, double longitude, String seaLevel) {
+        public PictureAttrs( String time,  String model,String orientation, double latitude, double longitude, String seaLevel) {
             this.time = time;
             this.model = model;
             this.latitude = latitude;
             this.longitude = longitude;
             this.seaLevel = seaLevel;
+            this.orientation=orientation;
+        }
+
+
+        public String getOrientation() {
+            return orientation;
+        }
+
+        public void setOrientation(String orientation) {
+            this.orientation = orientation;
         }
 
         public String getTime() {

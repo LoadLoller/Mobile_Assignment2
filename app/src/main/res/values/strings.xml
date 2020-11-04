@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Mobile_W01_07_5</string>
+    <string name="choose_photo">Choose photo</string>
+    <string name="upload_photo">Upload photo</string>
+    <string name="describe_this_place">Describe this place...</string>
+    <string name="todo">TODO</string>
 </resources>

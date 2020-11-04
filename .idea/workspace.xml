@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AnalysisUIOptions">
-    <option name="GROUP_BY_SEVERITY" value="true" />
-  </component>
   <component name="AndroidLayouts">
     <shared>
       <config />
@@ -12,13 +9,14 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="90d7eb89-6358-45c7-ae15-77db0880b3de" name="Default Changelist" comment="Photo uploading function added(may take a long time), image properties haven't upload to firebase, may need to decide a storage template.">
-      <change afterPath="$PROJECT_DIR$/app/google-services.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mobile_w01_07_5/PhotoAttrsUtil.java" afterDir="false" />
+    <list default="true" id="189f70dd-0ee6-40c3-97c7-403e7be798b4" name="Default Changelist" comment="realtime storage added, photo rotation fixed, description added back to map button deleted.">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mobile_W01_07_5.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mobile_w01_07_5/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mobile_w01_07_5/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mobile_w01_07_5/PhotoAttrsUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mobile_w01_07_5/PhotoAttrsUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +29,18 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -41,29 +51,24 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="info_of_stamp" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1jYR1igjxK26qxUy9vQSqxsYpT0" />
+  <component name="ProjectId" id="1jHhJIKAStKmTd9stEMPhAm9h0W" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.example.mobile_w01_07_5" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\COMP90018\Mobile_W01_07_5\app" />
-    </key>
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="android-custom-viewC:/Users/Administrator/AppData/Local/Android/Sdk/sources/android-30/android/view/View.java_SELECTED" value="View" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="multi-representation-previewC:/Users/Administrator/AppData/Local/Android/Sdk/sources/android-30/android/view/View.java_selected" value="Custom views" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
@@ -136,54 +141,90 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="90d7eb89-6358-45c7-ae15-77db0880b3de" name="Default Changelist" comment="" />
-      <created>1603978825520</created>
+      <changelist id="189f70dd-0ee6-40c3-97c7-403e7be798b4" name="Default Changelist" comment="" />
+      <created>1603466850633</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1603978825520</updated>
+      <updated>1603466850633</updated>
     </task>
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Photo uploading function added(may take a long time), image properties haven't upload to firebase, may need to decide a storage template." />
-    <option name="LAST_COMMIT_MESSAGE" value="Photo uploading function added(may take a long time), image properties haven't upload to firebase, may need to decide a storage template." />
+    <MESSAGE value="realtime storage added, photo rotation fixed, description added back to map button deleted." />
+    <option name="LAST_COMMIT_MESSAGE" value="realtime storage added, photo rotation fixed, description added back to map button deleted." />
   </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="160" key="#Plugins" timestamp="1603979447106">
+    <state x="765" y="216" key="#com.intellij.ide.util.MemberChooser" timestamp="1604475800304">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="160" key="#Plugins/0.0.1920.1040@0.0.1920.1040" timestamp="1603979447106" />
-    <state x="587" y="0" key="CommitChangelistDialog2" timestamp="1603981874326">
+    <state x="765" y="216" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1604475800304" />
+    <state x="196" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1604471847622">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="587" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1603981874326" />
-    <state width="1859" height="272" key="GridCell.Tab.0.bottom" timestamp="1603981308661">
+    <state x="196" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604471847622" />
+    <state x="807" y="297" key="AndroidCreateXmlResourceDialog" timestamp="1604476137377">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1859" height="272" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1603981308661" />
-    <state width="1859" height="272" key="GridCell.Tab.0.center" timestamp="1603981308661">
+    <state x="807" y="297" key="AndroidCreateXmlResourceDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604476137377" />
+    <state x="587" y="0" key="CommitChangelistDialog2" timestamp="1604476059742">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1859" height="272" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1603981308661" />
-    <state width="1859" height="272" key="GridCell.Tab.0.left" timestamp="1603981308661">
+    <state x="587" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1604476059742" />
+    <state width="1877" height="274" key="GridCell.Tab.0.bottom" timestamp="1604476059839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1859" height="272" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1603981308661" />
-    <state width="1859" height="272" key="GridCell.Tab.0.right" timestamp="1603981308661">
+    <state width="1877" height="274" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604476059839" />
+    <state width="1877" height="274" key="GridCell.Tab.0.center" timestamp="1604476059839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1859" height="272" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1603981308661" />
-    <state x="540" y="262" key="IDE.errors.dialog" timestamp="1603978835814">
+    <state width="1877" height="274" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604476059839" />
+    <state width="1877" height="274" key="GridCell.Tab.0.left" timestamp="1604476059839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="540" y="262" key="IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1603978835814" />
-    <state x="668" y="52" width="583" height="936" key="find.popup" timestamp="1603981518958">
+    <state width="1877" height="274" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604476059839" />
+    <state width="1877" height="274" key="GridCell.Tab.0.right" timestamp="1604476059839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="668" y="52" width="583" height="936" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1603981518958" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1603979406713">
+    <state width="1877" height="274" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604476059839" />
+    <state width="1877" height="275" key="GridCell.Tab.1.bottom" timestamp="1604475596806">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1603979406713" />
+    <state width="1877" height="275" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604475596806" />
+    <state width="1877" height="275" key="GridCell.Tab.1.center" timestamp="1604475596806">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="275" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604475596806" />
+    <state width="1877" height="275" key="GridCell.Tab.1.left" timestamp="1604475596806">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="275" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604475596806" />
+    <state width="1877" height="275" key="GridCell.Tab.1.right" timestamp="1604475596806">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="275" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604475596806" />
+    <state x="184" y="85" key="MergeDialog" timestamp="1604468053120">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="184" y="85" key="MergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604468053120" />
+    <state x="725" y="150" key="git4idea.branch.GitSmartOperationDialog" timestamp="1604468038883">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="725" y="150" key="git4idea.branch.GitSmartOperationDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604468038883" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/mobile_w01_07_5/MainActivity.java</url>
+          <line>102</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/mobile_w01_07_5/MainActivity.java</url>
+          <line>91</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
