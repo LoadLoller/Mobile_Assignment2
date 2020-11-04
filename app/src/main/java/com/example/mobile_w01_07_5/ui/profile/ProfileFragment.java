@@ -75,6 +75,8 @@ public class ProfileFragment extends Fragment {
          */
         // Set Up Hookers
         ImageView userImg = root.findViewById(R.id.userImg);
+        TextView userName = root.findViewById(R.id.userName);
+        TextView userAddr = root.findViewById(R.id.userAddr);
 
         TextView userFollower = root.findViewById(R.id.userFollower);
         TextView userFollowing = root.findViewById(R.id.userFollowing);
@@ -83,27 +85,31 @@ public class ProfileFragment extends Fragment {
         TextView userPhone = root.findViewById(R.id.userPhone);
         TextView userFb = root.findViewById(R.id.userFb);
 
-        reference = FirebaseDatabase.getInstance().getReference().child("Users").child("user");
+        reference = FirebaseDatabase.getInstance().getReference().child("Users").child("1");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     String userImgStr = snapshot.child("image").getValue().toString();
+                    String userAddrStr = snapshot.child("address").getValue().toString();
                     String userFollowerStr = snapshot.child("followers").getValue().toString();
                     String userFollowingStr = snapshot.child("following").getValue().toString();
 
                     String userEmailStr = snapshot.child("email").getValue().toString();
                     String userPhoneStr = snapshot.child("phone").getValue().toString();
-                    String userFbStr = snapshot.child("userID").getValue().toString();
+                    String userNameStr = snapshot.child("name").getValue().toString();
 
+                    // Set up views with values
                     Picasso.get().load(userImgStr).into(userImg);
+                    userName.setText(userNameStr);
+                    userAddr.setText(userAddrStr);
 
                     userFollower.setText(userFollowerStr);
                     userFollowing.setText(userFollowingStr);
 
                     userEmail.setText(userEmailStr);
                     userPhone.setText(userPhoneStr);
-                    userFb.setText(userFbStr);
+                    userFb.setText(userNameStr);
 
                 }else{
                     Log.d("500", "onDataChange: Error Occurs");
@@ -112,11 +118,20 @@ public class ProfileFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.d("500","Cancelled");
             }
         });
 
-
+        /**
+         * Log out
+         */
+//        Button logoutBtn = root.findViewById(R.id.logout);
+//        logoutBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // todo: redirect to login page
+//            }
+//        });
         return root;
     }
 
