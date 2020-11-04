@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                     imageName=imageName.substring(index+1);
                     String desription = textView.getText().toString();
                     photo.setDescription(desription);
-                    photo.setHighlyRelated(false);
+                    photo.setHighlyRated(false);
                     photo.setLatitude(Latitude);
                     photo.setLongitude(Longitude);
                     photo.setStampID(imageName);
