@@ -1,5 +1,6 @@
 package com.example.mobile_w01_07_5.ui.Adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ class StampsAdapter(private val stampItem: List<StampItem>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.a_single_stamp_row, parent, false)
+//        this.notifyDataSetChanged()
         return ViewHolder(view)
     }
 
@@ -28,7 +30,10 @@ class StampsAdapter(private val stampItem: List<StampItem>) :
         holder.bind(stampItem)
     }
 
+
+
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+
         fun bind(stampItem: StampItem) {
             itemView.stampItemTitle.text = stampItem.name
 //            itemView.foodPrice.text = foodItem.price.toString()
@@ -36,13 +41,12 @@ class StampsAdapter(private val stampItem: List<StampItem>) :
             if (stampItem.isHighlyRated) {
                 itemView.highlyRatedIcon.visibility = View.VISIBLE
             }
-
-            view.stampPhotoMain.setImageResource(stampItem.photo)
+            view.stampPhotoMain.setImageResource(Integer.parseInt(stampItem.photo))
 
             /*  https://developer.android.com/guide/navigation/navigation-pass-data   */
             view.stampPhotoMain.setOnClickListener {
                 val action =
-                    HomeFragmentDirections.actionHomeFragmentToProductInfo(stampItem.stampCode)
+                    HomeFragmentDirections.actionHomeFragmentToProductInfo(stampItem.stampID)
                 view.findNavController().navigate(action)
             }
 
