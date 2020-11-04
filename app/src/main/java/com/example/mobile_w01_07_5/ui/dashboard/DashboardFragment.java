@@ -101,10 +101,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback{
         for (int i = 0; i < stampList.size(); i++)
         {
             StampItem stamp = stampList.get(i);
-            String stamp_pos_str = stamp.getGeo_location();
-            String[] buff = stamp_pos_str.split(",");
-            //我没有完全懂为什么location是4个para，暂且取1和3了
-            LatLng stamp_pos = new LatLng(Double.parseDouble(buff[0]), Double.parseDouble(buff[3]));
+            LatLng stamp_pos = new LatLng(stamp.getLocationX(), stamp.getLocationY());
             mMap.addMarker(new MarkerOptions()
                     .position(stamp_pos)
                     .title(stamp.getName())
