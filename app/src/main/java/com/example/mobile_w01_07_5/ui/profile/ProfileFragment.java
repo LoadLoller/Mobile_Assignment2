@@ -21,6 +21,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.mobile_w01_07_5.R;
+import com.example.mobile_w01_07_5.ui.login.LoginActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -125,13 +126,14 @@ public class ProfileFragment extends Fragment {
         /**
          * Log out
          */
-//        Button logoutBtn = root.findViewById(R.id.logout);
-//        logoutBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // todo: redirect to login page
-//            }
-//        });
+        Button logoutBtn = root.findViewById(R.id.logout);
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
         return root;
     }
 
