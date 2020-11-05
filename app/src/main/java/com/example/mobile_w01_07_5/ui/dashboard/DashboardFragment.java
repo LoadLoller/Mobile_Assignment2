@@ -1,5 +1,6 @@
 package com.example.mobile_w01_07_5.ui.dashboard;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,11 +42,16 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -64,6 +70,11 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+
+        FirebaseStorage mStorage = FirebaseStorage.getInstance();
+        String stampBucket = "gs://mobile-assignment2.appspot.com";
+        StorageReference mStoRef = mStorage.getReferenceFromUrl(stampBucket).child("images");
+
         View root = inflater.inflate(R.layout.activity_maps, container, false);
 
         mMapView = (MapView) root.findViewById(R.id.map);
@@ -78,6 +89,8 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback{
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //Structure: HashMap -> HashMap -> userID -> value: String...
+
                 List<Object> stampsList = (List<Object>)snapshot.getValue();
 
                 for (int i = 0; i < stampsList.size(); i++)
@@ -91,10 +104,23 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback{
                     double locationX = Double.parseDouble(stamp.get("locationX").toString());
                     double locationY = Double.parseDouble(stamp.get("locationY").toString());
                     String photo = stamp.get("photo").toString();
-                    boolean isHighlyRated = Boolean.parseBoolean(stamp.get("highlyRated").toString());
-                    StampItem item = new StampItem(stampID, userID, name, rate, description,
-                            locationX, locationY, photo, isHighlyRated);
-                    stampList.add(item);
+                    StorageReference photoUrl = mStoRef.child(photo);
+                    photoUrl.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            // Got the download URL for 'users/me/profile.png'
+                            boolean isHighlyRated = Boolean.parseBoolean(stamp.get("highlyRated").toString());
+                            StampItem item = new StampItem(stampID, userID, name, rate, description,
+                                    locationX, locationY, uri, isHighlyRated);
+                            stampList.add(item);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle any errors
+                        }
+                    });
+
                 }
 
 
