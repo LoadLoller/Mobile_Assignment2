@@ -20,6 +20,8 @@ import com.example.mobile_w01_07_5.R;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import android.Manifest;
 import android.content.Context;
@@ -32,6 +34,8 @@ import android.os.Bundle;
 import com.example.mobile_w01_07_5.data.StampData;
 import com.example.mobile_w01_07_5.data.StampItem;
 import com.example.mobile_w01_07_5.ui.Adapters.StampsAdapter;
+import com.example.mobile_w01_07_5.ui.home.HomeFragmentDirections;
+import com.example.mobile_w01_07_5.ui.home.ProductInformationFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -64,6 +68,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback{
 
     private GoogleMap mMap;
     private MapView mMapView;
+    private View root;
     private ArrayList<StampItem> stampList;
     private static final int LOCATION_REQUEST = 9158;
 
@@ -75,7 +80,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback{
         String stampBucket = "gs://mobile-assignment2.appspot.com";
         StorageReference mStoRef = mStorage.getReferenceFromUrl(stampBucket).child("images");
 
-        View root = inflater.inflate(R.layout.activity_maps, container, false);
+        root = inflater.inflate(R.layout.activity_maps, container, false);
 
         mMapView = (MapView) root.findViewById(R.id.map);
         mMapView.onCreate(savedInstanceState);
@@ -175,7 +180,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback{
                     .position(stamp_pos)
                     .title(stamp.getName())
                     .snippet(stamp.getDescription()));
-            marker.setTag(stamp.getStampID());
+            marker.setTag(i);
         }
 
         //Add a marker at the user's current position based on GPS information
@@ -190,8 +195,10 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback{
             @Override
             public void onInfoWindowClick(Marker marker) {
                 //jump to stamp info page
-                String stampID = (String) marker.getTag();
-
+                int stampIndex = (int) marker.getTag();
+                StampItem stamp = stampList.get(stampIndex);
+                NavDirections action = HomeFragmentDirections.Companion.actionHomeFragmentToProductInfo(stamp.getStampID());
+                Navigation.findNavController(root).navigate(action);
             }
         });
     }
