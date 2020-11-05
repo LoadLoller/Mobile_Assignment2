@@ -1,16 +1,10 @@
 package com.example.mobile_w01_07_5.ui.profile;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,21 +15,15 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.mobile_w01_07_5.R;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
-import java.io.InputStream;
-import java.net.URISyntaxException;
-
-public class ProfileFragment extends Fragment {
+public class OtherUserProfileFragment extends Fragment {
 
     private ProfileViewModel profileViewModel;
     private StorageReference mStorageRef;
@@ -45,30 +33,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-
-        profileViewModel =
-                ViewModelProviders.of(this).get(ProfileViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_profile, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        profileViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-
-
-//        todo: remove after testing
-//        mStorageRef = FirebaseStorage.getInstance().getReference();
-//        StorageReference childRef=mStorageRef.child("images/cat.jpg");
-//        childRef.getBytes(1024*1024*30).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-//            @Override
-//            public void onSuccess(byte[] bytes) {
-//                Bitmap bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-//                img = (ImageView)root.findViewById(R.id.userImg);
-//                img.setImageBitmap(bitmap);
-//            }
-//        });
+        View root = inflater.inflate(R.layout.other_user_profile, container, false);
 
         /**
          * Update User Profile with Firebase Information
@@ -122,18 +87,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        /**
-         * Log out
-         */
-//        Button logoutBtn = root.findViewById(R.id.logout);
-//        logoutBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // todo: redirect to login page
-//            }
-//        });
         return root;
     }
-
 
 }
