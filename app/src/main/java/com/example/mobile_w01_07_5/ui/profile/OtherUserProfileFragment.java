@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.mobile_w01_07_5.R;
+import com.example.mobile_w01_07_5.ui.home.ProductInformationFragmentArgs;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -90,4 +91,11 @@ public class OtherUserProfileFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        String args = OtherUserProfileFragmentArgs.fromBundle(getArguments()).getUserIDArgument();
+        Log.d("+_+_+_+_", args);
+        TextView userID = view.findViewById(R.id.userID);
+        userID.setText("userID: " + args);
+    }
 }

@@ -50,9 +50,9 @@ class StampData {
     fun update_to_database(mDatabase:FirebaseDatabase, mRef:DatabaseReference) {
         val gson = Gson()
         val mockStamps = listOf<StampItem>(
-                StampItem("TS", "", "Melbourne Square", 5, "Beautifulll", -17.123, 23.123),
+                StampItem("TS", "1", "Melbourne Square", 5, "Beautifulll", -17.123, 23.123),
                 StampItem(
-                        "VBP", "",
+                        "VBP", "1",
                         "MSU Museum",
                         9,
                         "Really Beautifulll. This is the musemum from Michigan State University. I really like it!",
@@ -61,9 +61,9 @@ class StampData {
                         photo = R.drawable.msu_museum.toString(),
                         isHighlyRated = true
                 ),
-                StampItem("VNB", "", "UCB", 9, "Beautifulll",
+                StampItem("VNB", "1", "UCB", 9, "Beautifulll",
                         -17.123, 23.123, photo = R.drawable.ucberkeley.toString()),
-                StampItem("TS1", "", "Yosemite", 10, "Beautifulll",
+                StampItem("TS1", "1", "Yosemite", 10, "Beautifulll",
                         -17.123, 23.123, photo = R.drawable.yosemite.toString(), isHighlyRated = true)
 //                StampItem("TS2", "sfa", "Melbourne Square", 5.0, "Beautifulll",
 //                        -17.123, 23.123)

@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_HomeFragment_to_productInfo"
             app:destination="@id/productInfo" />
+        <action
+            android:id="@+id/action_navigation_feed_to_productInfo"
+            app:destination="@id/productInfo" />
     </fragment>
 
     <fragment
@@ -35,5 +38,18 @@
         <argument
             android:name="productCodeArgument"
             app:argType="string" />
+        <action
+            android:id="@+id/action_productInfo_to_otherUserProfile"
+            app:destination="@id/otherUserProfile" />
     </fragment>
+    <fragment
+        android:id="@+id/otherUserProfile"
+        android:name="com.example.mobile_w01_07_5.ui.profile.OtherUserProfileFragment"
+        android:label="otherUserProfile"
+        tools:layout="@layout/other_user_profile" >
+        <argument
+            android:name="userIDArgument"
+            app:argType="string" />
+    </fragment>
+
 </navigation>

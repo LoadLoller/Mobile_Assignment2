@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mobile_w01_07_5.R
@@ -18,6 +19,7 @@ import com.example.mobile_w01_07_5.data.StampData
 import com.example.mobile_w01_07_5.data.StampItem
 import com.example.mobile_w01_07_5.ui.Adapters.CommentsAdapter
 import com.example.mobile_w01_07_5.ui.Adapters.StampsAdapter
+import com.example.mobile_w01_07_5.ui.profile.OtherUserProfileFragment
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -81,12 +83,13 @@ class ProductInformationFragment : Fragment() {
                         )
 
                         checkUserProfileButton.setOnClickListener {
-                            requireActivity().getSharedPreferences("shopping_cart", Context.MODE_PRIVATE).edit().apply {
-                                putString("cart_amount", "twenty dollars")
-                                putString("cart_tax", "twenty dollars")
-                                putString("cart_quantity", "twenty dollars")
-                                putString("latest_checked", "Last checked: " + stamp.name)
-                            }.apply()
+                            val action =
+                                    ProductInformationFragmentDirections.actionProductInfoToOtherUserProfile(stamp.userID)
+                            it.findNavController().navigate(action)
+                            requireActivity().getSharedPreferences("shopping_cart", Context.MODE_PRIVATE)
+                                    .edit().apply {
+                                        putString("latest_checked", "Last checked: " + stamp.name)
+                                    }.apply()
                         }
                     }
                 }
@@ -108,8 +111,6 @@ class ProductInformationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
 //        val comments = CommentData().allComments().filter {
 //            it.stampCode == stampCode
 //        }
@@ -121,8 +122,7 @@ class ProductInformationFragment : Fragment() {
             adapter = CommentsAdapter(comments)
         }
 
-
-//        productTitile.text = productCode
+//        productTitle.text = productCode
     }
 
 }

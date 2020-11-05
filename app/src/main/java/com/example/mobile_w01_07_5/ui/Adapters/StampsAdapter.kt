@@ -30,8 +30,6 @@ class StampsAdapter(private val stampItem: List<StampItem>) :
         holder.bind(stampItem)
     }
 
-
-
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
         fun bind(stampItem: StampItem) {
