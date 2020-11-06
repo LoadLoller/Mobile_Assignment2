@@ -44,7 +44,7 @@ class StampsAdapter(private val stampItem: List<StampItem>) :
                 itemView.highlyRatedIcon.visibility = View.VISIBLE
             }
 //            view.stampPhotoMain.setImageResource(Integer.parseInt(stampItem.photo))
-            Log.d("HHHHHHHH", stampItem.photo.toString())
+//            Log.d("HHHHHHHH", stampItem.photo.toString())
             Glide.with(view.context).load(stampItem.photo).into(view.stampPhotoMain)
 
             /*  https://developer.android.com/guide/navigation/navigation-pass-data   */
