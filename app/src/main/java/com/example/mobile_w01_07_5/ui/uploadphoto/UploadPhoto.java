@@ -158,14 +158,14 @@ public class UploadPhoto extends AppCompatActivity {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             pd.dismiss();
                             //Uri downloadUri=taskSnapshot.getDownloadUrl();
-                            Toast.makeText(com.example.mobile_w01_07_5.ui.uploadphoto.UploadPhoto.this,"Upload successful",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UploadPhoto.this,"Upload successful",Toast.LENGTH_SHORT).show();
                         }
                     });
 
 
                 }
                 else{
-                    Toast.makeText(com.example.mobile_w01_07_5.ui.uploadphoto.UploadPhoto.this,"Select an image",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UploadPhoto.this,"Select or take an photo",Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -177,7 +177,7 @@ public class UploadPhoto extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(com.example.mobile_w01_07_5.ui.uploadphoto.UploadPhoto.this, MainActivity.class);
+        Intent intent = new Intent(UploadPhoto.this, MainActivity.class);
         startActivity(intent);
     }
 

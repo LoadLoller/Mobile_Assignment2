@@ -25,7 +25,8 @@
         android:id="@+id/uploadPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:background="@android:color/holo_purple"
+        android:textColor="@android:color/white"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="16dp"
         android:text="upload it!"
@@ -34,9 +35,10 @@
 
     <Button
         android:id="@+id/choosePhoto"
-        android:layout_width="136dp"
-        android:layout_height="wrap_content"
-
+        android:layout_width="155dp"
+        android:layout_height="50dp"
+        android:background="@android:color/holo_purple"
+        android:textColor="@android:color/white"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="51dp"
         android:layout_marginBottom="16dp"
@@ -45,7 +47,7 @@
         app:layout_constraintEnd_toStartOf="@+id/TakePhotoButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DescriptionText"
-        app:layout_constraintVertical_bias="0.388" />
+        app:layout_constraintVertical_bias="0.241" />
 
     <EditText
         android:id="@+id/DescriptionText"
@@ -58,9 +60,10 @@
         android:singleLine="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.452" />
 
     <EditText
         android:id="@+id/PhotoName"
@@ -79,15 +82,17 @@
 
     <Button
         android:id="@+id/TakePhotoButton"
-        android:layout_width="136dp"
-        android:layout_height="wrap_content"
+        android:layout_width="155dp"
+        android:layout_height="50dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="16dp"
         android:text="Take Photo"
+        android:background="@android:color/holo_purple"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.616"
         app:layout_constraintStart_toEndOf="@+id/choosePhoto"
         app:layout_constraintTop_toBottomOf="@+id/DescriptionText"
-        app:layout_constraintVertical_bias="0.388" />
+        app:layout_constraintVertical_bias="0.235" />
 </androidx.constraintlayout.widget.ConstraintLayout>
