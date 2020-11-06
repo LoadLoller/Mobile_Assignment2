@@ -63,8 +63,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         } else if (i == R.id.emailSignInButton) {
             signIn(mBinding.fieldEmail.getText().toString(), mBinding.fieldPassword.getText().toString());
             hideKeyboard(v);
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
         } else if (i == R.id.signOutButton) {
             signOut();
         } else if (i == R.id.verifyEmailButton) {
@@ -153,6 +151,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     Log.d(debug_message, "signInWithEmailAndPassword - SUCCESS!");
                     FirebaseUser user = mAuth.getCurrentUser();
                     updateUI(user);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
                 }
                 else {
                     // sign in fails
