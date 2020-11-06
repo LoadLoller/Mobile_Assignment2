@@ -1,13 +1,19 @@
 package com.example.mobile_w01_07_5;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.mobile_w01_07_5.data.StampData;
 import com.example.mobile_w01_07_5.data.StampItem;
+import com.example.mobile_w01_07_5.ui.uploadphoto.UploadPhoto;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
+    private FloatingActionButton uploadPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +59,16 @@ public class MainActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mDatabaseReference= mDatabase.getReference("Stamps/stamp");
 //        new StampData().update_to_database(mDatabase, mDatabaseReference);
+
+        uploadPhoto=findViewById(R.id.UploadPhotoButton);
+        uploadPhoto.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, UploadPhoto.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override

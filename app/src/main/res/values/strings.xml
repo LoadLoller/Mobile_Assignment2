@@ -24,7 +24,7 @@
     <string name="sign_out">Sign Out</string>
     <string name="title_activity_base">BaseActivity</string>
 
-<!--    string in Login Activity updateUI()-->
+    <!--    string in Login Activity updateUI()-->
     <string name="emailpassword_status_fmt">Email User: %1$s (verified: %2$b)</string>
     <string name="firebase_status_fmt">Firebase UID: %s</string>
     <string name="auth_failed">Authentication failed</string>
