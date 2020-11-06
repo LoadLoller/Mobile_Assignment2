@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,8 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.mobile_w01_07_5.R;
 import com.example.mobile_w01_07_5.ui.login.LoginActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,6 +45,19 @@ public class ProfileFragment extends Fragment {
     private StorageReference mStorageRef;
     private ImageView img;
     private DatabaseReference reference;
+    private String uid;
+    private String email;
+
+    public void getUser(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            uid = user.getUid();
+            email = user.getEmail();
+            Log.d("message from profile fragment, uid",uid);
+            Log.d("message from profile fragment, email",email);
+
+        }
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -86,10 +102,12 @@ public class ProfileFragment extends Fragment {
         TextView userPhone = root.findViewById(R.id.userPhone);
         TextView userFb = root.findViewById(R.id.userFb);
 
-        reference = FirebaseDatabase.getInstance().getReference().child("Users").child("1");
+        reference = FirebaseDatabase.getInstance().getReference().child("Users").child("2");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                getUser();
+
                 if (snapshot.exists()){
                     String userImgStr = snapshot.child("image").getValue().toString();
                     String userAddrStr = snapshot.child("address").getValue().toString();
@@ -102,13 +120,15 @@ public class ProfileFragment extends Fragment {
 
                     // Set up views with values
                     Picasso.get().load(userImgStr).into(userImg);
-                    userName.setText(userNameStr);
+//                    userName.setText(userNameStr);
+                    userName.setText(email);
                     userAddr.setText(userAddrStr);
 
                     userFollower.setText(userFollowerStr);
                     userFollowing.setText(userFollowingStr);
 
-                    userEmail.setText(userEmailStr);
+//                    userEmail.setText(userEmailStr);
+                    userEmail.setText(email);
                     userPhone.setText(userPhoneStr);
                     userFb.setText(userNameStr);
 
