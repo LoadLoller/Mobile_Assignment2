@@ -9,13 +9,13 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="413dp"
-        android:layout_height="317dp"
+        android:layout_width="wrap_content"
+        android:layout_height="304dp"
         android:layout_marginBottom="10dp"
         android:adjustViewBounds="true"
         app:layout_constraintBottom_toTopOf="@+id/PhotoName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/msu_museum"
@@ -25,11 +25,11 @@
         android:id="@+id/uploadPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_purple"
-        android:textColor="@android:color/white"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginBottom="16dp"
+        android:background="@android:color/holo_purple"
         android:text="upload it!"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -95,4 +95,15 @@
         app:layout_constraintStart_toEndOf="@+id/choosePhoto"
         app:layout_constraintTop_toBottomOf="@+id/DescriptionText"
         app:layout_constraintVertical_bias="0.235" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_uploadphoto"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/uploadPhoto" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

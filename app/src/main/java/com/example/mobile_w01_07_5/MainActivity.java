@@ -54,15 +54,12 @@ public class MainActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mDatabaseReference= mDatabase.getReference("Stamps/stamp");
-//        new StampData().update_to_database(mDatabase, mDatabaseReference);
+
 
         uploadPhoto=findViewById(R.id.UploadPhotoButton);
-        uploadPhoto.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, UploadPhoto.class);
-                startActivity(intent);
-            }
+        uploadPhoto.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, UploadPhoto.class);
+            startActivity(intent);
         });
 
     }
