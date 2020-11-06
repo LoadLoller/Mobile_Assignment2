@@ -43,7 +43,6 @@ public class ProfileFragment extends Fragment {
 
     private ProfileViewModel profileViewModel;
     private StorageReference mStorageRef;
-    private ImageView img;
     private DatabaseReference reference;
     private String uid;
     private String email;
@@ -55,9 +54,9 @@ public class ProfileFragment extends Fragment {
             email = user.getEmail();
             Log.d("message from profile fragment, uid",uid);
             Log.d("message from profile fragment, email",email);
-
         }
     }
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -110,18 +109,18 @@ public class ProfileFragment extends Fragment {
 
                 if (snapshot.exists()){
                     String userImgStr = snapshot.child("image").getValue().toString();
+                    String userNameStr = snapshot.child("name").getValue().toString();
                     String userAddrStr = snapshot.child("address").getValue().toString();
+
                     String userFollowerStr = snapshot.child("followers").getValue().toString();
                     String userFollowingStr = snapshot.child("following").getValue().toString();
 
-                    String userEmailStr = snapshot.child("email").getValue().toString();
                     String userPhoneStr = snapshot.child("phone").getValue().toString();
-                    String userNameStr = snapshot.child("name").getValue().toString();
+                    String userFbStr = snapshot.child("fb").getValue().toString();
 
                     // Set up views with values
                     Picasso.get().load(userImgStr).into(userImg);
-//                    userName.setText(userNameStr);
-                    userName.setText(email);
+                    userName.setText(userNameStr);
                     userAddr.setText(userAddrStr);
 
                     userFollower.setText(userFollowerStr);
@@ -130,7 +129,7 @@ public class ProfileFragment extends Fragment {
 //                    userEmail.setText(userEmailStr);
                     userEmail.setText(email);
                     userPhone.setText(userPhoneStr);
-                    userFb.setText(userNameStr);
+                    userFb.setText(userFbStr);
 
                 }else{
                     Log.d("500", "onDataChange: Error Occurs");
@@ -140,6 +139,23 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.d("500","Cancelled");
+            }
+        });
+
+
+        /**
+         * Update
+         */
+        Button updateBtn = root.findViewById(R.id.update);
+        updateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Read user's updated information
+                String newUserNameStr = userName.getText().toString();
+                String newUserAddrStr = userAddr.getText().toString();
+                String newUserPhoneStr = userPhone.getText().toString();
+                String newUserFb = userFb.getText().toString();
+                writeNewProfile(newUserNameStr, newUserAddrStr, newUserPhoneStr, newUserFb);
             }
         });
 
@@ -154,7 +170,16 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+
         return root;
+    }
+
+    public void writeNewProfile(String name, String addr, String phone, String fb){
+        reference.child("name").setValue(name);
+        reference.child("address").setValue(addr);
+        reference.child("phone").setValue(phone);
+        reference.child("fb").setValue(fb);
     }
 
 
