@@ -101,12 +101,12 @@ public class ProfileFragment extends Fragment {
         TextView userEmail = root.findViewById(R.id.userEmail);
         TextView userPhone = root.findViewById(R.id.userPhone);
         TextView userFb = root.findViewById(R.id.userFb);
+        getUser();
 
-        reference = FirebaseDatabase.getInstance().getReference().child("Users").child("2");
+        reference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                getUser();
 
                 if (snapshot.exists()){
                     String userImgStr = snapshot.child("image").getValue().toString();
