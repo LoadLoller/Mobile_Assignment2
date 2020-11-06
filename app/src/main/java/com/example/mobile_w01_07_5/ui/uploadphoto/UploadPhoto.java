@@ -139,8 +139,18 @@ public class UploadPhoto extends AppCompatActivity {
                     photo.setLocationY(Longitude);
                     photo.setStampID(imageName);
                     photo.setPhoto(imageName);
-                    photo.setUserID(currentUser.toString());
-                    System.out.println(currentUser);
+                    //photo.setUserID(currentUser.toString());
+                    //System.out.println(currentUser);
+                    TextView photoName = findViewById(R.id.PhotoName);
+                    String Name = photoName.getText().toString();
+                    photo.setName(Name);
+                    int new_index = imageName.lastIndexOf(".");
+                    String title=imageName.substring(0,new_index);
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference myRef = database.getReference("Stamps").child("stamp");
+                    DatabaseReference stampRef = myRef.child(title);
+                    stampRef.setValue(photo);
+
                     StorageReference childRef=mStorageRef.child("images/"+imageName);
                     UploadTask uploadTask=childRef.putFile(filePath);
                     uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -152,13 +162,7 @@ public class UploadPhoto extends AppCompatActivity {
                         }
                     });
 
-                    TextView photoName = findViewById(R.id.PhotoName);
-                    String Name = photoName.getText().toString();
-                    photo.setName(Name);
-                    FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference myRef = database.getReference("Stamps").child("stamp");
-                    DatabaseReference stampRef = myRef.child(photo.getStampID());
-                    stampRef.setValue(photo);
+
                 }
                 else{
                     Toast.makeText(com.example.mobile_w01_07_5.ui.uploadphoto.UploadPhoto.this,"Select an image",Toast.LENGTH_SHORT).show();
