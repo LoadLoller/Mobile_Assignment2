@@ -8,21 +8,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.mobile_w01_07_5.R
-import com.example.mobile_w01_07_5.data.StampData
 import com.example.mobile_w01_07_5.data.StampItem
 import com.example.mobile_w01_07_5.ui.Adapters.StampsAdapter
-import com.google.firebase.database.*
-import com.google.gson.Gson
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FileDownloadTask
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.fragment_home.*
+import java.io.File
 
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class HomeFragment : Fragment() {
-
-    private var Stamps = StampData()
     var stampList: ArrayList<StampItem>? = null
 
     override fun onCreateView(
@@ -32,33 +37,42 @@ class HomeFragment : Fragment() {
         stampList = arrayListOf<StampItem>()
         var database = FirebaseDatabase.getInstance()
         var myRef = database.getReference("Stamps/stamp")
+        val mStorage = FirebaseStorage.getInstance()
+        var stampBucket = "gs://mobile-assignment2.appspot.com"
+        val mStoRef = mStorage.getReferenceFromUrl(stampBucket).child("images")
 
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
-                val stampsList = listOf(dataSnapshot.value)
-                val stamps = stampsList.first() as List<*>
-
-//                Log.d(">>>>>>>>>", stampsList.toString())
-                for (stamp in stamps) {
-                    val s = stamp as HashMap<*, *>
-//                    for (stampItem in s.values) {
-//                        val currentStamp = stampItem as HashMap<*, *>
-                        val stampID = s.get("stampID").toString()
-                        val userID = s.get("userID").toString()
-                        val name = s.get("name").toString()
-                        val rate = s.get("rate").toString().toInt()
-                        val description = s.get("description").toString()
-                        val locationX = s.get("locationX").toString().toDouble()
-                        val locationY = s.get("locationY").toString().toDouble()
-                        val photo = s.get("photo").toString()
-                        val isHighlyRated = s.get("highlyRated").toString().toBoolean()
-                        val stampItem = StampItem(stampID, userID, name, rate, description,
-                                locationX, locationY, photo, isHighlyRated)
-                        stampList?.add(stampItem)
-//                    }
+//                val stampsList = listOf(dataSnapshot.value)
+                stampList!!.clear()
+                val stampsList = dataSnapshot.value as HashMap<*, *>
+//                val stamps = stampsList.first() as List<*>
+                for (stamps  in stampsList.values) {
+                    var stamp = stamps as HashMap<*, *>
+//                    val currentStamp = stampItem as HashMap<*, *>
+                        val stampID = stamp.get("stampID").toString()
+                        val userID = stamp.get("userID").toString()
+                        val name = stamp.get("name").toString()
+                        val rate = stamp.get("rate").toString().toInt()
+                        val description = stamp.get("description").toString()
+                        val locationX = stamp.get("locationX").toString().toDouble()
+                        val locationY = stamp.get("locationY").toString().toDouble()
+                        var photo = stamp.get("photo").toString()
+                        var photoUrl = mStoRef.child(photo)
+                        val localFile = File.createTempFile("images", "jpg")
+                        photoUrl.downloadUrl.addOnSuccessListener {
+                            val isHighlyRated = stamp.get("highlyRated").toString().toBoolean()
+                            val stampItem = StampItem(stampID, userID, name, rate, description,
+                                    locationX, locationY, it, isHighlyRated)
+                            stampList?.add(stampItem)
+                            stampRecyclerView.adapter = StampsAdapter(stampList!!)
+                        }.addOnFailureListener {
+                            Log.d("EEEEEEEEEEEError from photo Url", photoUrl.toString())
+                        }
                 }
-                stampRecyclerView.adapter = StampsAdapter(stampList!!.toList())
+//                }
+//                stampRecyclerView.adapter = StampsAdapter(stampList!!.toList())
             }
 
             override fun onCancelled(databaseError: DatabaseError) {

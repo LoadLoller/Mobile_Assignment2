@@ -6,10 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.with
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.with
 import com.example.mobile_w01_07_5.R
 import com.example.mobile_w01_07_5.data.StampItem
 import com.example.mobile_w01_07_5.ui.home.HomeFragment
 import com.example.mobile_w01_07_5.ui.home.HomeFragmentDirections
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.a_single_stamp_row.view.*
 
 class StampsAdapter(private val stampItem: List<StampItem>) :
@@ -39,7 +43,9 @@ class StampsAdapter(private val stampItem: List<StampItem>) :
             if (stampItem.isHighlyRated) {
                 itemView.highlyRatedIcon.visibility = View.VISIBLE
             }
-            view.stampPhotoMain.setImageResource(Integer.parseInt(stampItem.photo))
+//            view.stampPhotoMain.setImageResource(Integer.parseInt(stampItem.photo))
+            Log.d("HHHHHHHH", stampItem.photo.toString())
+            Glide.with(view.context).load(stampItem.photo).into(view.stampPhotoMain)
 
             /*  https://developer.android.com/guide/navigation/navigation-pass-data   */
             view.stampPhotoMain.setOnClickListener {
