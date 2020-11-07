@@ -9,13 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.mobile_w01_07_5.R;
-import com.example.mobile_w01_07_5.ui.home.ProductInformationFragmentArgs;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,9 +22,7 @@ import com.squareup.picasso.Picasso;
 
 public class OtherUserProfileFragment extends Fragment {
 
-    private ProfileViewModel profileViewModel;
     private StorageReference mStorageRef;
-    private ImageView img;
     private DatabaseReference reference;
 
     public View onCreateView(@NonNull LayoutInflater inflater,

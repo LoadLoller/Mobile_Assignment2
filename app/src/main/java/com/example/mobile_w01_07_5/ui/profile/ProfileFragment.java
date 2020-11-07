@@ -1,11 +1,6 @@
 package com.example.mobile_w01_07_5.ui.profile;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,32 +11,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.mobile_w01_07_5.R;
 import com.example.mobile_w01_07_5.ui.login.LoginActivity;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
-import java.io.InputStream;
-import java.net.URISyntaxException;
-
 public class ProfileFragment extends Fragment {
 
-    private ProfileViewModel profileViewModel;
     private StorageReference mStorageRef;
     private DatabaseReference reference;
     private String uid;
@@ -62,16 +49,7 @@ public class ProfileFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        profileViewModel =
-                ViewModelProviders.of(this).get(ProfileViewModel.class);
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        profileViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
 
 
 //        todo: remove after testing
@@ -126,7 +104,6 @@ public class ProfileFragment extends Fragment {
                     userFollower.setText(userFollowerStr);
                     userFollowing.setText(userFollowingStr);
 
-//                    userEmail.setText(userEmailStr);
                     userEmail.setText(email);
                     userPhone.setText(userPhoneStr);
                     userFb.setText(userFbStr);
@@ -156,6 +133,9 @@ public class ProfileFragment extends Fragment {
                 String newUserPhoneStr = userPhone.getText().toString();
                 String newUserFb = userFb.getText().toString();
                 writeNewProfile(newUserNameStr, newUserAddrStr, newUserPhoneStr, newUserFb);
+
+                Snackbar mySnackbar = Snackbar.make(view, "Information Updated", BaseTransientBottomBar.LENGTH_SHORT);
+                mySnackbar.show();
             }
         });
 
@@ -171,10 +151,16 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-
         return root;
     }
 
+    /**
+     * Write User's Information into REALTIME DATABASE
+     * @param name user's new nickname
+     * @param addr user's new address
+     * @param phone user's new phone number
+     * @param fb user's new facebook account
+     */
     public void writeNewProfile(String name, String addr, String phone, String fb){
         reference.child("name").setValue(name);
         reference.child("address").setValue(addr);
