@@ -6,35 +6,6 @@
     android:layout_height="wrap_content"
     android:paddingBottom="24dp">
 
-    <Button
-        android:id="@+id/likeButton"
-        android:layout_width="50dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="#2196F3"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:text="Like"
-        android:textColor="#FFFFFF"
-        android:textSize="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stampItemTitle" />
-
-    <Button
-        android:id="@+id/unLikeButton"
-        android:layout_width="50dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="16dp"
-        android:background="#ff0000"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:text="Unlike"
-        android:textColor="#FFFFFF"
-        android:textSize="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/likeButton" />
-
     <ImageView
         android:id="@+id/stampPhotoMain"
         android:layout_width="0dp"
@@ -45,43 +16,70 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/stampItemTitle"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="sans-serif-black"
-        android:text="Yosemite"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stampPhotoMain" />
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/stampPhotoMain"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/stampItemTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:padding="10dp"
+            android:text="Yosemite"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/likeButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/ic_baseline_thumb_up_1_alt_30" />
+
+        <Button
+            android:id="@+id/unLikeButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/ic_baseline_thumb_down_alt_30" />
+
+        <ImageView
+            android:id="@+id/highlyRatedIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/highly_rated"
+            app:tint="#2196F3"
+            tools:ignore="VectorDrawableCompat" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/stampRate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="93dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="20dp"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stampPhotoMain"
         tools:text="4.99" />
 
-    <ImageView
-        android:id="@+id/highlyRatedIcon"
-        android:layout_width="21dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="44dp"
-        android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@+id/dislikeButton"
-        app:layout_constraintTop_toBottomOf="@+id/stampItemTitle"
-        app:srcCompat="@drawable/highly_rated"
-        app:tint="#2196F3"
-        tools:ignore="VectorDrawableCompat" />
+
+
+
+
+
+
 
     <!-- <ImageButton
         android:id="@+id/likeButton"
@@ -103,5 +101,35 @@
         app:layout_constraintStart_toEndOf="@+id/likeButton"
         app:layout_constraintTop_toBottomOf="@+id/stampItemTitle"
         app:srcCompat="@drawable/ic_baseline_thumb_down_alt_30" /> -->
+
+    <!--    ChengJin Version-->
+    <!--    <Button-->
+    <!--        android:id="@+id/likeButton"-->
+
+    <!--        android:layout_width="50dp"-->
+    <!--        android:layout_height="22dp"-->
+    <!--        android:layout_marginStart="16dp"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        android:background="#2196F3"-->
+    <!--        android:paddingLeft="16dp"-->
+    <!--        android:paddingRight="16dp"-->
+    <!--        android:text="Like"-->
+    <!--        android:textColor="#FFFFFF"-->
+    <!--        android:textSize="8dp"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/stampItemTitle" />-->
+
+    <!--    <ImageView-->
+    <!--        android:id="@+id/highlyRatedIcon"-->
+    <!--        android:layout_width="21dp"-->
+    <!--        android:layout_height="21dp"-->
+    <!--        android:layout_marginStart="15dp"-->
+    <!--        android:layout_marginTop="44dp"-->
+    <!--        android:visibility="invisible"-->
+    <!--        app:layout_constraintStart_toEndOf="@+id/dislikeButton"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/stampItemTitle"-->
+    <!--        app:srcCompat="@drawable/highly_rated"-->
+    <!--        app:tint="#2196F3"-->
+    <!--        tools:ignore="VectorDrawableCompat" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
