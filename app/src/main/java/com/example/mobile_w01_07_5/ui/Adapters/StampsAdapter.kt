@@ -55,30 +55,30 @@ class StampsAdapter(private val stampItem: List<StampItem>) :
                     HomeFragmentDirections.actionHomeFragmentToProductInfo(stampItem.stampID)
                 view.findNavController().navigate(action)
             }
-            /*
-            * Like button handler
-            */
-            view.likeButton.setOnClickListener {
-                it.likeButton.setImageResource(R.drawable.ic_baseline_thumb_up_1_alt_30)
-                val new_index = stampItem.stampID.lastIndexOf(".")
-                val stampId = stampItem.stampID.substring(0, new_index)
-                myRef.child(stampId).child("rate").setValue(stampItem.rate + 1)
-            }
-
-            /*
-            * Dislike button handler
-            */
-            view.dislikeButton.setOnClickListener {
-                if(stampItem.rate > 0) {
-                    it.dislikeButton.setImageResource(R.drawable.ic_baseline_thumb_down_1_alt_30)
-                    val new_index = stampItem.stampID.lastIndexOf(".")
-                    val stampId = stampItem.stampID.substring(0, new_index)
-                    myRef.child(stampId).child("rate").setValue(stampItem.rate - 1)
-                }
-            }
+//            /*
+//            * Like button handler
+//            */
+//            view.likeButton.setOnClickListener {
+//                it.likeButton.setImageResource(R.drawable.ic_baseline_thumb_up_1_alt_30)
+//                val new_index = stampItem.stampID.lastIndexOf(".")
+//                val stampId = stampItem.stampID.substring(0, new_index)
+//                myRef.child(stampId).child("rate").setValue(stampItem.rate + 1)
+//            }
+//
+//            /*
+//            * Dislike button handler
+//            */
+//            view.dislikeButton.setOnClickListener {
+//                if(stampItem.rate > 0) {
+//                    it.dislikeButton.setImageResource(R.drawable.ic_baseline_thumb_down_1_alt_30)
+//                    val new_index = stampItem.stampID.lastIndexOf(".")
+//                    val stampId = stampItem.stampID.substring(0, new_index)
+//                    myRef.child(stampId).child("rate").setValue(stampItem.rate - 1)
+//                }
+//            }
             view.likeButton.setOnClickListener{
                 val fileName = stampItem.stampID.substring(0,stampItem.stampID.lastIndexOf("."))
-                Log.d("file",fileName);
+//                Log.d("file",fileName);
                 reference = FirebaseDatabase.getInstance().reference.child("Stamps").child("stamp").child(fileName);
 //                reference.addValueEventListener(object : ValueEventListener {
 //                    override fun onDataChange(snapshot: DataSnapshot) {
@@ -98,7 +98,7 @@ class StampsAdapter(private val stampItem: List<StampItem>) :
 
             view.unLikeButton.setOnClickListener{
                 val fileName = stampItem.stampID.substring(0,stampItem.stampID.lastIndexOf("."))
-                Log.d("file",fileName);
+//                Log.d("file",fileName);
                 reference = FirebaseDatabase.getInstance().reference.child("Stamps").child("stamp").child(fileName);
                 reference.child("highlyRated").setValue(false);
             }
