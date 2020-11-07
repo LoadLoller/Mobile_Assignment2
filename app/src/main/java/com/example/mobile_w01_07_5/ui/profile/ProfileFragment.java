@@ -1,7 +1,13 @@
 package com.example.mobile_w01_07_5.ui.profile;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +21,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mobile_w01_07_5.R;
 import com.example.mobile_w01_07_5.ui.login.LoginActivity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,8 +32,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class ProfileFragment extends Fragment {
 
@@ -33,6 +47,9 @@ public class ProfileFragment extends Fragment {
     private DatabaseReference reference;
     private String uid;
     private String email;
+    private View root;
+    private ImageView userImg;
+    private String userImgStr;
 
     public void getUser(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -49,26 +66,14 @@ public class ProfileFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        View root = inflater.inflate(R.layout.fragment_profile, container, false);
+        root = inflater.inflate(R.layout.fragment_profile, container, false);
 
-
-//        todo: remove after testing
-//        mStorageRef = FirebaseStorage.getInstance().getReference();
-//        StorageReference childRef=mStorageRef.child("images/cat.jpg");
-//        childRef.getBytes(1024*1024*30).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-//            @Override
-//            public void onSuccess(byte[] bytes) {
-//                Bitmap bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-//                img = (ImageView)root.findViewById(R.id.userImg);
-//                img.setImageBitmap(bitmap);
-//            }
-//        });
 
         /**
          * Update User Profile with Firebase Information
          */
         // Set Up Hookers
-        ImageView userImg = root.findViewById(R.id.userImg);
+        userImg = root.findViewById(R.id.userImg);
         TextView userName = root.findViewById(R.id.userName);
         TextView userAddr = root.findViewById(R.id.userAddr);
 
@@ -78,15 +83,18 @@ public class ProfileFragment extends Fragment {
         TextView userEmail = root.findViewById(R.id.userEmail);
         TextView userPhone = root.findViewById(R.id.userPhone);
         TextView userFb = root.findViewById(R.id.userFb);
+
+        // Get Current User's ID
         getUser();
 
+        // Set Up FIREBASE DATABASE reference
         reference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 if (snapshot.exists()){
-                    String userImgStr = snapshot.child("image").getValue().toString();
+                    userImgStr = snapshot.child("image").getValue().toString();
                     String userNameStr = snapshot.child("name").getValue().toString();
                     String userAddrStr = snapshot.child("address").getValue().toString();
 
@@ -96,8 +104,16 @@ public class ProfileFragment extends Fragment {
                     String userPhoneStr = snapshot.child("phone").getValue().toString();
                     String userFbStr = snapshot.child("fb").getValue().toString();
 
+                    // Load User profile image from storage
+                    mStorageRef = FirebaseStorage.getInstance().getReference().child("profiles/"+userImgStr);
+                    mStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Picasso.get().load(uri).into(userImg);
+                        }
+                    });
+
                     // Set up views with values
-                    Picasso.get().load(userImgStr).into(userImg);
                     userName.setText(userNameStr);
                     userAddr.setText(userAddrStr);
 
@@ -121,7 +137,7 @@ public class ProfileFragment extends Fragment {
 
 
         /**
-         * Update
+         * Update User Information
          */
         Button updateBtn = root.findViewById(R.id.update);
         updateBtn.setOnClickListener(new View.OnClickListener() {
@@ -151,6 +167,18 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        /**
+         * Modify User's Profile Image
+         */
+        Button addImgBtn = root.findViewById(R.id.addImg);
+        addImgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, 200);
+            }
+        });
+
         return root;
     }
 
@@ -168,5 +196,58 @@ public class ProfileFragment extends Fragment {
         reference.child("fb").setValue(fb);
     }
 
+    /**
+     * React to edit user profile action
+     * @param requestCode 200: edit user profile request
+     * @param resultCode action result code
+     * @param data
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //Detects request codes
+        if(requestCode==200 && resultCode == Activity.RESULT_OK) {
+            Uri selectedImage = data.getData();
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(), selectedImage);
+                userImg.setImageBitmap(bitmap);
+
+                // Upload user's new profile image to FIREBASE STORAGE
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] bytearr = baos.toByteArray();
+
+                // Detect if this is the first time the user set up the profile image
+                if (userImgStr.equals("default.jpg")){
+                    mStorageRef = FirebaseStorage.getInstance().getReference().child("profiles/"+uid+".jpg");
+                };
+
+                // Upload user's profile image
+                UploadTask uploadUserImg = mStorageRef.putBytes(bytearr);
+                uploadUserImg.addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("Error", "onFailure: Fail to Update Profile Image");
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        // Show msg when update successfully
+                        Snackbar img_update_note = Snackbar.make(getView(), "Profile Image Updated", BaseTransientBottomBar.LENGTH_SHORT);
+                        img_update_note.show();
+                    }
+                });
+
+            } catch (FileNotFoundException e) {
+                Log.d("Error", "onActivityResult: User Profile Picture Not Found");
+                e.printStackTrace();
+            } catch (IOException e) {
+                Log.d("Error","onActivityResult: User Profile Picture Read/Write Error");
+                e.printStackTrace();
+            }
+        }
+    }
 
 }

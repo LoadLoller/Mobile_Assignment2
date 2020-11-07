@@ -70,4 +70,12 @@ public class MainActivity extends AppCompatActivity {
 //        https://github.com/firebase/quickstart-android/blob/adbb3cd0934f77a0338d4ba48be1eaad12cf3107/auth/app/src/main/java/com/google/firebase/quickstart/auth/java/AnonymousAuthActivity.java#L73-L79
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+
+        super.onActivityResult(requestCode,resultCode,data);
+
+    }
+
 }
