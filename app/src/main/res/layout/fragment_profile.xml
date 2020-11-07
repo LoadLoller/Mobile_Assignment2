@@ -173,17 +173,11 @@
                     android:text="Phone"
                     android:textSize="13sp" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                </RelativeLayout>
-
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/userPhone"
-                    android:inputType="phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:inputType="phone"
                     android:paddingTop="0dp"
                     android:textSize="18sp" />
 
@@ -226,31 +220,21 @@
 
             <Button
                 android:id="@+id/update"
-                android:layout_width="130dp"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
+                android:layout_marginRight="40dp"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:theme="@style/ThemeOverlay.MyDarkButton"
                 android:text="UPDATE"/>
 
             <Button
                 android:id="@+id/logout"
-                android:layout_width="130dp"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
+                android:theme="@style/ThemeOverlay.MyDarkButton"
                 android:text="Log Out"/>
 
         </LinearLayout>
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/text_notifications"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

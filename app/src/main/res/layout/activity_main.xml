@@ -44,6 +44,6 @@
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="@+id/nav_host_fragment"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@drawable/addicon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
