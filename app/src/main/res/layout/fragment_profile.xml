@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/userName"
             android:layout_centerHorizontal="true"
-            android:text="Address for test user"
+            android:text="Address"
             android:textSize="18sp" />
 
     </RelativeLayout>
@@ -160,6 +160,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/userPhone"
+                    android:inputType="phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp" />
