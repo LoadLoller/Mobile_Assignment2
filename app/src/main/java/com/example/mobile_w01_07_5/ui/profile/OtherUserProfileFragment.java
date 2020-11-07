@@ -51,19 +51,22 @@ public class OtherUserProfileFragment extends Fragment {
         TextView userPhone = root.findViewById(R.id.userPhone);
         TextView userFb = root.findViewById(R.id.userFb);
 
-        reference = FirebaseDatabase.getInstance().getReference().child("Users").child("1");
+        String userId = OtherUserProfileFragmentArgs.fromBundle(getArguments()).getUserIDArgument();
+        reference = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     String userImgStr = snapshot.child("image").getValue().toString();
+                    String userNameStr = snapshot.child("name").getValue().toString();
                     String userAddrStr = snapshot.child("address").getValue().toString();
+
                     String userFollowerStr = snapshot.child("followers").getValue().toString();
                     String userFollowingStr = snapshot.child("following").getValue().toString();
 
                     String userEmailStr = snapshot.child("email").getValue().toString();
                     String userPhoneStr = snapshot.child("phone").getValue().toString();
-                    String userNameStr = snapshot.child("name").getValue().toString();
+                    String userFbStr = snapshot.child("fb").getValue().toString();
 
                     // Set up views with values
                     Picasso.get().load(userImgStr).into(userImg);
@@ -75,7 +78,7 @@ public class OtherUserProfileFragment extends Fragment {
 
                     userEmail.setText(userEmailStr);
                     userPhone.setText(userPhoneStr);
-                    userFb.setText(userNameStr);
+                    userFb.setText(userFbStr);
 
                 }else{
                     Log.d("500", "onDataChange: Error Occurs");
@@ -91,11 +94,4 @@ public class OtherUserProfileFragment extends Fragment {
         return root;
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        String args = OtherUserProfileFragmentArgs.fromBundle(getArguments()).getUserIDArgument();
-        Log.d("+_+_+_+_", args);
-        TextView userID = view.findViewById(R.id.userID);
-        userID.setText("userID: " + args);
-    }
 }
