@@ -58,19 +58,19 @@ class StampsAdapter(private val stampItem: List<StampItem>) :
                 val fileName = stampItem.stampID.substring(0,stampItem.stampID.lastIndexOf("."))
                 Log.d("file",fileName);
                 reference = FirebaseDatabase.getInstance().reference.child("Stamps").child("stamp").child(fileName);
-                reference.addValueEventListener(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        if (snapshot.exists()) {
-                            Log.d("test",snapshot.child("highlyRated").getValue().toString());
-                        } else {
-                            Log.d("500", "onDataChange: Error Occurs")
-                        }
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-                        Log.d("500", "Cancelled")
-                    }
-                })
+//                reference.addValueEventListener(object : ValueEventListener {
+//                    override fun onDataChange(snapshot: DataSnapshot) {
+//                        if (snapshot.exists()) {
+//                            Log.d("test",snapshot.child("highlyRated").getValue().toString());
+//                        } else {
+//                            Log.d("500", "onDataChange: Error Occurs")
+//                        }
+//                    }
+//
+//                    override fun onCancelled(error: DatabaseError) {
+//                        Log.d("500", "Cancelled")
+//                    }
+//                })
                 reference.child("highlyRated").setValue(true);
             }
 
@@ -78,23 +78,8 @@ class StampsAdapter(private val stampItem: List<StampItem>) :
                 val fileName = stampItem.stampID.substring(0,stampItem.stampID.lastIndexOf("."))
                 Log.d("file",fileName);
                 reference = FirebaseDatabase.getInstance().reference.child("Stamps").child("stamp").child(fileName);
-                reference.addValueEventListener(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        if (snapshot.exists()) {
-                            Log.d("test",snapshot.child("highlyRated").getValue().toString());
-                        } else {
-                            Log.d("500", "onDataChange: Error Occurs")
-                        }
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-                        Log.d("500", "Cancelled")
-                    }
-                })
                 reference.child("highlyRated").setValue(false);
             }
-//
-//            reference = FirebaseDatabase.getInstance().reference.child("Stamps").child("stamp").child(fileName);
 
 
         }
