@@ -166,12 +166,12 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback{
                     Location current_location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
                     //Add a marker at the user's current position based on GPS information
-                    if (current_location != null) {
-                        LatLng current_position = new LatLng(current_location.getLatitude(), current_location.getLongitude());
-                        mMap.addMarker(new MarkerOptions().position(current_position).title("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-                        mMap.moveCamera(CameraUpdateFactory.newLatLng(current_position));
-                        mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
-                    }
+//                    if (current_location != null) {
+//                        LatLng current_position = new LatLng(current_location.getLatitude(), current_location.getLongitude());
+//                        mMap.addMarker(new MarkerOptions().position(current_position).title("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+//                        mMap.moveCamera(CameraUpdateFactory.newLatLng(current_position));
+//                        mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+//                    }
                 }
 
             }
@@ -230,12 +230,12 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback{
         }
 
         //Add a marker at the user's current position based on GPS information
-        if (current_location != null) {
-            LatLng current_position = new LatLng(current_location.getLatitude(), current_location.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(current_position).title("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(current_position));
-            mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
-        }
+//        if (current_location != null) {
+//            LatLng current_position = new LatLng(current_location.getLatitude(), current_location.getLongitude());
+//            mMap.addMarker(new MarkerOptions().position(current_position).title("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+//            mMap.moveCamera(CameraUpdateFactory.newLatLng(current_position));
+//            mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+//        }
 
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
