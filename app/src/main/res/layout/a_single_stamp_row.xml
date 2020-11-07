@@ -6,6 +6,35 @@
     android:layout_height="wrap_content"
     android:paddingBottom="24dp">
 
+    <Button
+        android:id="@+id/likeButton"
+        android:layout_width="50dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="#2196F3"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="Like"
+        android:textColor="#FFFFFF"
+        android:textSize="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stampItemTitle" />
+
+    <Button
+        android:id="@+id/unLikeButton"
+        android:layout_width="50dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="16dp"
+        android:background="#ff0000"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="Unlike"
+        android:textColor="#FFFFFF"
+        android:textSize="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/likeButton" />
+
     <ImageView
         android:id="@+id/stampPhotoMain"
         android:layout_width="0dp"
@@ -54,7 +83,7 @@
         app:tint="#2196F3"
         tools:ignore="VectorDrawableCompat" />
 
-    <ImageButton
+    <!-- <ImageButton
         android:id="@+id/likeButton"
         android:layout_width="77dp"
         android:layout_height="74dp"
@@ -73,6 +102,6 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toEndOf="@+id/likeButton"
         app:layout_constraintTop_toBottomOf="@+id/stampItemTitle"
-        app:srcCompat="@drawable/ic_baseline_thumb_down_alt_30" />
+        app:srcCompat="@drawable/ic_baseline_thumb_down_alt_30" /> -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
