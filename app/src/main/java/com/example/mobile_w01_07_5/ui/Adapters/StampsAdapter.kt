@@ -1,23 +1,21 @@
 package com.example.mobile_w01_07_5.ui.Adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.with
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.with
 import com.example.mobile_w01_07_5.R
 import com.example.mobile_w01_07_5.data.StampItem
-import com.example.mobile_w01_07_5.ui.home.HomeFragment
 import com.example.mobile_w01_07_5.ui.home.HomeFragmentDirections
-import com.squareup.picasso.Picasso
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.a_single_stamp_row.view.*
 
 class StampsAdapter(private val stampItem: List<StampItem>) :
     RecyclerView.Adapter<StampsAdapter.ViewHolder>() {
+
+    var buttonClicked = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -37,14 +35,15 @@ class StampsAdapter(private val stampItem: List<StampItem>) :
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
         fun bind(stampItem: StampItem) {
+            var database = FirebaseDatabase.getInstance()
+            var myRef = database.getReference("Stamps/stamp")
+
             itemView.stampItemTitle.text = stampItem.name
 //            itemView.foodPrice.text = foodItem.price.toString()
             itemView.stampRate.text = "Rate: ${stampItem.rate}"
-            if (stampItem.isHighlyRated) {
+            if(stampItem.rate > 5 || stampItem.isHighlyRated)
                 itemView.highlyRatedIcon.visibility = View.VISIBLE
-            }
 //            view.stampPhotoMain.setImageResource(Integer.parseInt(stampItem.photo))
-//            Log.d("HHHHHHHH", stampItem.photo.toString())
             Glide.with(view.context).load(stampItem.photo).into(view.stampPhotoMain)
 
             /*  https://developer.android.com/guide/navigation/navigation-pass-data   */
@@ -53,7 +52,27 @@ class StampsAdapter(private val stampItem: List<StampItem>) :
                     HomeFragmentDirections.actionHomeFragmentToProductInfo(stampItem.stampID)
                 view.findNavController().navigate(action)
             }
+            /*
+            * Like button handler
+            */
+            view.likeButton.setOnClickListener {
+                it.likeButton.setImageResource(R.drawable.ic_baseline_thumb_up_1_alt_30)
+                val new_index = stampItem.stampID.lastIndexOf(".")
+                val stampId = stampItem.stampID.substring(0, new_index)
+                myRef.child(stampId).child("rate").setValue(stampItem.rate + 1)
+            }
 
+            /*
+            * Dislike button handler
+            */
+            view.dislikeButton.setOnClickListener {
+                if(stampItem.rate > 0) {
+                    it.dislikeButton.setImageResource(R.drawable.ic_baseline_thumb_down_1_alt_30)
+                    val new_index = stampItem.stampID.lastIndexOf(".")
+                    val stampId = stampItem.stampID.substring(0, new_index)
+                    myRef.child(stampId).child("rate").setValue(stampItem.rate - 1)
+                }
+            }
         }
     }
 }

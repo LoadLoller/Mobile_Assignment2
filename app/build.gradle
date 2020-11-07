@@ -66,6 +66,8 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'com.firebaseui:firebase-ui-storage:6.2.0'
 
+    implementation 'com.github.thekhaeng:pushdown-anim-click:1.1.1'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

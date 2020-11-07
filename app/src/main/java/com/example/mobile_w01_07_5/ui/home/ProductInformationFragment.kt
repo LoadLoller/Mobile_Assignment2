@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
+import com.thekhaeng.pushdownanim.PushDownAnim
 import kotlinx.android.synthetic.main.a_single_stamp_row.view.*
 import kotlinx.android.synthetic.main.product_info.*
 
@@ -42,12 +43,15 @@ class ProductInformationFragment : Fragment() {
         var stampBucket = "gs://mobile-assignment2.appspot.com"
         val mStoRef = mStorage.getReferenceFromUrl(stampBucket).child("images")
 
+        /*
+        * Check current stamp from database
+        */
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
                 val stampsList = dataSnapshot.value as HashMap<*, *>
 //                val stamps = stampsList.first() as List<*>
-                for (stamps  in stampsList.values) {
+                for (stamps in stampsList.values) {
                     var stamp = stamps as HashMap<*, *>
 //                    val currentStamp = stampItem as HashMap<*, *>
                     val stampID = stamp.get("stampID").toString()
@@ -82,8 +86,7 @@ class ProductInformationFragment : Fragment() {
 //                                        Integer.parseInt(stamp.photo)
 //                                )
 //                        )
-
-                            checkUserProfileButton.setOnClickListener {
+                            PushDownAnim.setPushDownAnimTo(checkUserProfileButton).setOnClickListener {
                                 val action =
                                         ProductInformationFragmentDirections.actionProductInfoToOtherUserProfile(currStamp.userID)
                                 it.findNavController().navigate(action)
@@ -117,7 +120,9 @@ class ProductInformationFragment : Fragment() {
 //        val comments = CommentData().allComments().filter {
 //            it.stampCode == stampCode
 //        }
-
+        /*
+        * Comments block
+        */
         val comments = CommentData().allComments()
 
         commentRecyclerView.apply {

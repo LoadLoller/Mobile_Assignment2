@@ -66,6 +66,7 @@ class HomeFragment : Fragment() {
                             val stampItem = StampItem(stampID, userID, name, rate, description,
                                     locationX, locationY, it, isHighlyRated)
                             stampList?.add(stampItem)
+//                            stampList!!.sortBy { it.name }
                             stampRecyclerView.adapter = StampsAdapter(stampList!!)
                         }.addOnFailureListener {
                             Log.d("EEEEEEEEEEEError from photo Url", photoUrl.toString())

@@ -6,20 +6,6 @@
     android:layout_height="wrap_content"
     android:paddingBottom="24dp">
 
-    <Button
-        android:id="@+id/likeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="#2196F3"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:text="Like"
-        android:textColor="#FFFFFF"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stampItemTitle" />
-
     <ImageView
         android:id="@+id/stampPhotoMain"
         android:layout_width="0dp"
@@ -48,21 +34,45 @@
         android:id="@+id/stampRate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="93dp"
         android:layout_marginEnd="16dp"
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="@+id/likeButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stampPhotoMain"
         tools:text="4.99" />
 
     <ImageView
         android:id="@+id/highlyRatedIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_width="21dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="44dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/likeButton"
-        app:layout_constraintStart_toEndOf="@+id/likeButton"
+        app:layout_constraintStart_toEndOf="@+id/dislikeButton"
+        app:layout_constraintTop_toBottomOf="@+id/stampItemTitle"
         app:srcCompat="@drawable/highly_rated"
-        tools:ignore="VectorDrawableCompat"
-        app:tint="#2196F3" />
+        app:tint="#2196F3"
+        tools:ignore="VectorDrawableCompat" />
+
+    <ImageButton
+        android:id="@+id/likeButton"
+        android:layout_width="77dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stampItemTitle"
+        app:srcCompat="@drawable/ic_baseline_thumb_up_alt_30"
+        tools:ignore="VectorDrawableCompat" />
+
+    <ImageButton
+        android:id="@+id/dislikeButton"
+        android:layout_width="77dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/likeButton"
+        app:layout_constraintTop_toBottomOf="@+id/stampItemTitle"
+        app:srcCompat="@drawable/ic_baseline_thumb_down_alt_30" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
