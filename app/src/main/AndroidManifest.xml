@@ -18,7 +18,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.mobile_w01_07_5"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+        <activity android:name=".ui.uploadphoto.UploadPhoto" />
         <activity
             android:name=".ui.login.BaseActivity"
             android:label="@string/title_activity_base"
