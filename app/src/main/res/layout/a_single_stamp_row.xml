@@ -41,7 +41,7 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginRight="10dp"
-            android:background="@drawable/ic_baseline_thumb_up_1_alt_30" />
+            android:background="@drawable/ic_baseline_thumb_up_alt_30" />
 
         <Button
             android:id="@+id/unLikeButton"

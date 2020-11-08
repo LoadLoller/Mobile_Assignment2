@@ -67,11 +67,14 @@ class HomeFragment : Fragment() {
                                     locationX, locationY, it, isHighlyRated)
                             stampList?.add(stampItem)
                             stampList!!.sortBy { it.name }
-                            stampRecyclerView.adapter = StampsAdapter(stampList!!)
+                            stampRecyclerView.adapter = StampsAdapter(stampList!!.toList())
+//                            var adapter = stampRecyclerView.adapter as StampsAdapter
+//                            adapter.submitList(stampList!!.toList())
                         }.addOnFailureListener {
                             Log.d("EEEEEEEEEEEError from photo Url", photoUrl.toString())
                         }
                 }
+
 //                }
 //                stampRecyclerView.adapter = StampsAdapter(stampList!!.toList())
             }

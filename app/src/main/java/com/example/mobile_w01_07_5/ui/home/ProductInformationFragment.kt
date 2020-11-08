@@ -31,17 +31,17 @@ class ProductInformationFragment : Fragment() {
 
     val args: ProductInformationFragmentArgs by navArgs()
     var stampList: ArrayList<StampItem>? = null
+    var database = FirebaseDatabase.getInstance()
+    var myRef = database.getReference("Stamps/stamp")
+    val mStorage = FirebaseStorage.getInstance()
+    var stampBucket = "gs://mobile-assignment2.appspot.com"
+    val mStoRef = mStorage.getReferenceFromUrl(stampBucket).child("images")
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
         stampList = arrayListOf<StampItem>()
-        var database = FirebaseDatabase.getInstance()
-        var myRef = database.getReference("Stamps/stamp")
-        val mStorage = FirebaseStorage.getInstance()
-        var stampBucket = "gs://mobile-assignment2.appspot.com"
-        val mStoRef = mStorage.getReferenceFromUrl(stampBucket).child("images")
 
         /*
         * Check current stamp from database
@@ -76,10 +76,10 @@ class ProductInformationFragment : Fragment() {
                         }
 
                         if (currStamp != null) {
+//                            Log.d("ERROR is HEREEEEEEEEEEEEE", currStamp.toString())
                             productTitle.text = currStamp.name
                             productInfoDescription.text = currStamp.description
                             context?.let { it1 -> Glide.with(it1).load(currStamp.photo).into(stampPhotoMain) }
-//                            Picasso.get().load(currStamp.photo).into(stampPhotoMain)
 //                        stampPhotoMain.setImageDrawable(
 //                                ContextCompat.getDrawable(
 //                                        requireActivity(),
