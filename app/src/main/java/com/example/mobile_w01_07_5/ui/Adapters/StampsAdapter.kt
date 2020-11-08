@@ -1,8 +1,11 @@
 package com.example.mobile_w01_07_5.ui.Adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -10,12 +13,20 @@ import com.bumptech.glide.Glide
 import com.example.mobile_w01_07_5.R
 import com.example.mobile_w01_07_5.data.StampItem
 import com.example.mobile_w01_07_5.ui.home.HomeFragmentDirections
+import com.example.mobile_w01_07_5.ui.home.ProductInformationFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.a_single_stamp_row.view.*
+import java.util.logging.Handler
 
 class StampsAdapter(private var stampItem: List<StampItem>) :
         RecyclerView.Adapter<StampsAdapter.ViewHolder>() {
+    var mDatabase = FirebaseDatabase.getInstance()
+    var mRef = mDatabase.getReference("Stamps/stamp")
+    var mAuth = FirebaseAuth.getInstance()
+
+    private lateinit var mHandler: Handler
+    private lateinit var mRunnable: Runnable
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -30,6 +41,51 @@ class StampsAdapter(private var stampItem: List<StampItem>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val stampItem = stampItem[position]
         holder.bind(stampItem)
+
+        /*
+        * Like button handler
+        */
+        holder.itemView.likeButton.setOnClickListener {
+            //                if (mAuth.currentUser?.uid !in stampItem.likedBy) {
+            val currStamp = stampItem.stampID.substring(0, stampItem.stampID.lastIndexOf("."))
+            mRef.child(currStamp).child("rate").setValue(stampItem.rate + 1)
+            if (stampItem.rate + 1 >= 5) {
+                mRef.child(currStamp).child("highlyRated").setValue(true)
+            }
+            stampItem.rate += 1
+            // add current user to the stamp database
+//                    stampItem.likedBy.add(mAuth.currentUser?.uid)
+//                    myRef.child(currStamp).child("likedBy").setValue(stampItem.likedBy)
+//                }
+            notifyDataSetChanged()
+        }
+
+        /*
+        * Dislike button handler
+        */
+        holder.itemView.unLikeButton.setOnClickListener {
+//                if (mAuth.currentUser?.uid in stampItem.likedBy) {
+            val currStamp = stampItem.stampID.substring(0, stampItem.stampID.lastIndexOf("."))
+            mRef.child(currStamp).child("rate").setValue(stampItem.rate - 1)
+            if (stampItem.rate - 1 < 5) {
+                mRef.child(currStamp).child("highlyRated").setValue(false)
+            }
+            stampItem.rate -= 1
+            // delete current user to the stamp database
+//                    stampItem.likedBy.remove(mAuth.currentUser?.uid)
+//                    myRef.child(currStamp).child("likedBy").setValue(stampItem.likedBy)
+//                }
+            notifyDataSetChanged()
+        }
+
+        /*  https://developer.android.com/guide/navigation/navigation-pass-data   */
+        holder.itemView.stampPhotoMain.setOnClickListener {
+            val action =
+                    HomeFragmentDirections.actionHomeFragmentToProductInfo(stampItem.stampID)
+            holder.itemView.findNavController().navigate(action)
+            notifyDataSetChanged()
+
+        }
     }
 
     fun submitList(stampItemList: List<StampItem>) {
@@ -67,59 +123,13 @@ class StampsAdapter(private var stampItem: List<StampItem>) :
 
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
-        var mDatabase = FirebaseDatabase.getInstance()
-        var mRef = mDatabase.getReference("Stamps/stamp")
-        var mAuth = FirebaseAuth.getInstance()
-
         fun bind(stampItem: StampItem) {
-
             itemView.stampItemTitle.text = stampItem.name
             itemView.stampRate.text = "Rate: ${stampItem.rate}"
             if (stampItem.rate > 5 || stampItem.isHighlyRated)
                 itemView.highlyRatedIcon.visibility = View.VISIBLE
 //            view.stampPhotoMain.setImageResource(Integer.parseInt(stampItem.photo))
             Glide.with(view.context).load(stampItem.photo).into(view.stampPhotoMain)
-
-            /*  https://developer.android.com/guide/navigation/navigation-pass-data   */
-            view.stampPhotoMain.setOnClickListener {
-                val action =
-                        HomeFragmentDirections.actionHomeFragmentToProductInfo(stampItem.stampID)
-                view.findNavController().navigate(action)
-            }
-
-            /*
-            * Like button handler
-            */
-            view.likeButton.setOnClickListener {
-//                if (mAuth.currentUser?.uid !in stampItem.likedBy) {
-                val currStamp = stampItem.stampID.substring(0, stampItem.stampID.lastIndexOf("."))
-                mRef.child(currStamp).child("rate").setValue(stampItem.rate + 1)
-                if (stampItem.rate + 1 >= 5) {
-                    mRef.child(currStamp).child("highlyRated").setValue(true)
-                }
-                // add current user to the stamp database
-//                    stampItem.likedBy.add(mAuth.currentUser?.uid)
-//                    myRef.child(currStamp).child("likedBy").setValue(stampItem.likedBy)
-//                }
-            }
-
-            /*
-            * Dislike button handler
-            */
-            view.unLikeButton.setOnClickListener {
-//                if (mAuth.currentUser?.uid in stampItem.likedBy) {
-                val currStamp = stampItem.stampID.substring(0, stampItem.stampID.lastIndexOf("."))
-                mRef.child(currStamp).child("rate").setValue(stampItem.rate - 1)
-                if (stampItem.rate - 1 < 5) {
-                    mRef.child(currStamp).child("highlyRated").setValue(false)
-                }
-                // delete current user to the stamp database
-//                    stampItem.likedBy.remove(mAuth.currentUser?.uid)
-//                    myRef.child(currStamp).child("likedBy").setValue(stampItem.likedBy)
-//                }
-            }
-
-
         }
     }
 }

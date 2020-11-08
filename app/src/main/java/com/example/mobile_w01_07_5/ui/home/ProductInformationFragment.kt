@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,7 +27,6 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import com.thekhaeng.pushdownanim.PushDownAnim
-import kotlinx.android.synthetic.main.a_single_stamp_row.view.*
 import kotlinx.android.synthetic.main.product_info.*
 
 class ProductInformationFragment : Fragment() {
@@ -36,78 +38,56 @@ class ProductInformationFragment : Fragment() {
     val mStorage = FirebaseStorage.getInstance()
     var stampBucket = "gs://mobile-assignment2.appspot.com"
     val mStoRef = mStorage.getReferenceFromUrl(stampBucket).child("images")
+    lateinit var viewModel: StampViewModel
+    var stampViewID = ""
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
         stampList = arrayListOf<StampItem>()
+        viewModel = StampViewModel()
+        stampViewID = args.productCodeArgument
 
         /*
         * Check current stamp from database
         */
-        val postListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Get Post object and use the values to update the UI
-                val stampsList = dataSnapshot.value as HashMap<*, *>
-//                val stamps = stampsList.first() as List<*>
-                for (stamps in stampsList.values) {
-                    var stamp = stamps as HashMap<*, *>
-//                    val currentStamp = stampItem as HashMap<*, *>
-                    val stampID = stamp.get("stampID").toString()
-                    val userID = stamp.get("userID").toString()
-                    val name = stamp.get("name").toString()
-                    val rate = stamp.get("rate").toString().toInt()
-                    val description = stamp.get("description").toString()
-                    val locationX = stamp.get("locationX").toString().toDouble()
-                    val locationY = stamp.get("locationY").toString().toDouble()
-                    var photo = stamp.get("photo").toString()
-                    var photoUrl = mStoRef.child(photo)
-                    photoUrl.downloadUrl.addOnSuccessListener {
-                        val isHighlyRated = stamp.get("highlyRated").toString().toBoolean()
-                        val stampItem = StampItem(stampID, userID, name, rate, description,
-                                locationX, locationY, it, isHighlyRated)
-                        stampList?.add(stampItem)
+//        val postListener = object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                // Get Post object and use the values to update the UI
+//                val stampsList = dataSnapshot.value as HashMap<*, *>
+////                val stamps = stampsList.first() as List<*>
+//                for (stamps in stampsList.values) {
+//                    var stamp = stamps as HashMap<*, *>
+////                    val currentStamp = stampItem as HashMap<*, *>
+//                    val stampID = stamp.get("stampID").toString()
+//                    val userID = stamp.get("userID").toString()
+//                    val name = stamp.get("name").toString()
+//                    val rate = stamp.get("rate").toString().toInt()
+//                    val description = stamp.get("description").toString()
+//                    val locationX = stamp.get("locationX").toString().toDouble()
+//                    val locationY = stamp.get("locationY").toString().toDouble()
+//                    var photo = stamp.get("photo").toString()
+//                    var photoUrl = mStoRef.child(photo)
+//                    photoUrl.downloadUrl.addOnSuccessListener {
+//                        val isHighlyRated = stamp.get("highlyRated").toString().toBoolean()
+//                        val stampItem = StampItem(stampID, userID, name, rate, description,
+//                                locationX, locationY, it, isHighlyRated)
+//                        stampList?.add(stampItem)
+//
 
-                        val stampViewID = args.productCodeArgument
-
-                        val currStamp = stampList?.toList()?.find {
-                            it.stampID == stampViewID
-                        }
-
-                        if (currStamp != null) {
-//                            Log.d("ERROR is HEREEEEEEEEEEEEE", currStamp.toString())
-                            productTitle.text = currStamp.name
-                            productInfoDescription.text = currStamp.description
-                            context?.let { it1 -> Glide.with(it1).load(currStamp.photo).into(stampPhotoMain) }
-//                        stampPhotoMain.setImageDrawable(
-//                                ContextCompat.getDrawable(
-//                                        requireActivity(),
-//                                        Integer.parseInt(stamp.photo)
-//                                )
-//                        )
-                            PushDownAnim.setPushDownAnimTo(checkUserProfileButton).setOnClickListener {
-                                val action =
-                                        ProductInformationFragmentDirections.actionProductInfoToOtherUserProfile(currStamp.userID)
-                                it.findNavController().navigate(action)
-                                requireActivity().getSharedPreferences("shopping_cart", Context.MODE_PRIVATE)
-                                        .edit().apply {
-                                            putString("latest_checked", "Last checked: " + currStamp.name)
-                                        }.apply()
-                            }
-                        }
-                    }
-                }
-
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
-                Log.w("--------------------++", "loadPost:onCancelled", databaseError.toException())
-                // ...
-            }
-        }
-        myRef.addValueEventListener(postListener)
+//                    }
+//                }
+//
+//            }
+//
+//            override fun onCancelled(databaseError: DatabaseError) {
+//                // Getting Post failed, log a message
+//                Log.w("--------------------++", "loadPost:onCancelled", databaseError.toException())
+//                // ...
+//            }
+//        }
+//        myRef.addValueEventListener(postListener)
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.product_info, container, false)
@@ -117,6 +97,21 @@ class ProductInformationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val currStamp = stampList?.toList()?.find {
+            it.stampID == stampViewID
+        }
+
+        if (currStamp != null) {
+//                            Log.d("ERROR is HEREEEEEEEEEEEEE", currStamp.toString())
+
+//                        stampPhotoMain.setImageDrawable(
+//                                ContextCompat.getDrawable(
+//                                        requireActivity(),
+//                                        Integer.parseInt(stamp.photo)
+//                                )
+//                        )
+
+        }
 //        val comments = CommentData().allComments().filter {
 //            it.stampCode == stampCode
 //        }
@@ -131,6 +126,33 @@ class ProductInformationFragment : Fragment() {
         }
 
 //        productTitle.text = productCode
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.getStamps().observe(this, Observer { stamps ->
+            if(stamps != null) {
+                Log.d("----------||", stamps.toString())
+                for (stamp in stamps) {
+                    if (stamp.stampID == stampViewID) {
+                        productTitle.text = stamp.name
+                        productInfoDescription.text = stamp.description
+                        context?.let { it1 -> Glide.with(it1).load(stamp.photo).into(stampPhotoMain) }
+
+                        PushDownAnim.setPushDownAnimTo(checkUserProfileButton).setOnClickListener {
+                            val action =
+                                    ProductInformationFragmentDirections.actionProductInfoToOtherUserProfile(stamp.userID)
+                            it.findNavController().navigate(action)
+                            requireActivity().getSharedPreferences("shopping_cart", Context.MODE_PRIVATE)
+                                    .edit().apply {
+                                        putString("latest_checked", "Last checked: " + stamp.name)
+                                    }.apply()
+                        }
+                    }
+                }
+            }
+        })
     }
 
 }
