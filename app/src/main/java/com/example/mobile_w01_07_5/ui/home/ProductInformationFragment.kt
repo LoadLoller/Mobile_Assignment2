@@ -49,46 +49,6 @@ class ProductInformationFragment : Fragment() {
         viewModel = StampViewModel()
         stampViewID = args.productCodeArgument
 
-        /*
-        * Check current stamp from database
-        */
-//        val postListener = object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                // Get Post object and use the values to update the UI
-//                val stampsList = dataSnapshot.value as HashMap<*, *>
-////                val stamps = stampsList.first() as List<*>
-//                for (stamps in stampsList.values) {
-//                    var stamp = stamps as HashMap<*, *>
-////                    val currentStamp = stampItem as HashMap<*, *>
-//                    val stampID = stamp.get("stampID").toString()
-//                    val userID = stamp.get("userID").toString()
-//                    val name = stamp.get("name").toString()
-//                    val rate = stamp.get("rate").toString().toInt()
-//                    val description = stamp.get("description").toString()
-//                    val locationX = stamp.get("locationX").toString().toDouble()
-//                    val locationY = stamp.get("locationY").toString().toDouble()
-//                    var photo = stamp.get("photo").toString()
-//                    var photoUrl = mStoRef.child(photo)
-//                    photoUrl.downloadUrl.addOnSuccessListener {
-//                        val isHighlyRated = stamp.get("highlyRated").toString().toBoolean()
-//                        val stampItem = StampItem(stampID, userID, name, rate, description,
-//                                locationX, locationY, it, isHighlyRated)
-//                        stampList?.add(stampItem)
-//
-
-//                    }
-//                }
-//
-//            }
-//
-//            override fun onCancelled(databaseError: DatabaseError) {
-//                // Getting Post failed, log a message
-//                Log.w("--------------------++", "loadPost:onCancelled", databaseError.toException())
-//                // ...
-//            }
-//        }
-//        myRef.addValueEventListener(postListener)
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.product_info, container, false)
     }
@@ -97,21 +57,10 @@ class ProductInformationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val currStamp = stampList?.toList()?.find {
-            it.stampID == stampViewID
-        }
+//        val currStamp = stampList?.toList()?.find {
+//            it.stampID == stampViewID
+//        }
 
-        if (currStamp != null) {
-//                            Log.d("ERROR is HEREEEEEEEEEEEEE", currStamp.toString())
-
-//                        stampPhotoMain.setImageDrawable(
-//                                ContextCompat.getDrawable(
-//                                        requireActivity(),
-//                                        Integer.parseInt(stamp.photo)
-//                                )
-//                        )
-
-        }
 //        val comments = CommentData().allComments().filter {
 //            it.stampCode == stampCode
 //        }

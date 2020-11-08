@@ -44,35 +44,12 @@ class HomeFragment : Fragment() {
         stampList = arrayListOf<StampItem>()
         recyclerViewAdapter = StampsAdapter(stampList!!)
 
-
-
-        val postListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Get Post object and use the values to update the UI
-//                val stampsList = listOf(dataSnapshot.value)
-
-//                }
-//                stampRecyclerView.adapter = StampsAdapter(stampList!!.toList())
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
-                Log.w("--------------------++", "loadPost:onCancelled", databaseError.toException())
-                // ...
-            }
-        }
-//        myRef.addValueEventListener(postListener)
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        view.findViewById<Button>(R.id.button_first).setOnClickListener {
-//            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-//        }
 
         var stampItems = stampList
 
@@ -85,8 +62,8 @@ class HomeFragment : Fragment() {
         stampRecyclerView.adapter?.notifyDataSetChanged()
 
 
-        val textViewText = requireActivity().getSharedPreferences("shopping_cart", Context.MODE_PRIVATE)
-                .getString("latest_checked", "Last checked: default")
+        val textViewText = requireActivity().getSharedPreferences("shopping_cart",
+                Context.MODE_PRIVATE).getString("latest_checked", "Last checked: default")
 
         latestItemInCart.text = textViewText
     }
@@ -94,7 +71,7 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         viewModel.getStamps().observe(this, Observer { stamps ->
-            if(stamps != null)
+            if (stamps != null)
                 recyclerViewAdapter.submitList(stamps)
         })
     }
@@ -139,12 +116,13 @@ class StampViewModel : ViewModel() {
                         }
                     }
                 }
-                        override fun onCancelled(databaseError: DatabaseError) {
-                            // Getting Post failed, log a message
-                            Log.w("--------------------++", "loadPost:onCancelled", databaseError.toException())
-                            // ...
-                        }
-                    })
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Getting Post failed, log a message
+                    Log.w("--------------------++", "loadPost:onCancelled", databaseError.toException())
+                    // ...
+                }
+            })
         }
         return stampsMutable
     }

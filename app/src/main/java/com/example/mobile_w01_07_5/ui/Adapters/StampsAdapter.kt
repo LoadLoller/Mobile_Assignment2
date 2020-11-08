@@ -1,6 +1,7 @@
 package com.example.mobile_w01_07_5.ui.Adapters
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,9 +26,6 @@ class StampsAdapter(private var stampItem: List<StampItem>) :
     var mRef = mDatabase.getReference("Stamps/stamp")
     var mAuth = FirebaseAuth.getInstance()
 
-    private lateinit var mHandler: Handler
-    private lateinit var mRunnable: Runnable
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.a_single_stamp_row, parent, false)
@@ -47,6 +45,10 @@ class StampsAdapter(private var stampItem: List<StampItem>) :
         */
         holder.itemView.likeButton.setOnClickListener {
             //                if (mAuth.currentUser?.uid !in stampItem.likedBy) {
+            it.likeButton.setBackgroundResource(R.drawable.ic_baseline_thumb_up_1_alt_30)
+            holder.itemView.unLikeButton.setBackgroundResource(R.drawable.ic_baseline_thumb_down_alt_30)
+//            if (it.unLikeButton.cu != R.drawable.ic_baseline_thumb_down_alt_30)
+//            it.unLikeButton.setBackgroundResource(R.drawable.ic_baseline_thumb_down_alt_30)
             val currStamp = stampItem.stampID.substring(0, stampItem.stampID.lastIndexOf("."))
             mRef.child(currStamp).child("rate").setValue(stampItem.rate + 1)
             if (stampItem.rate + 1 >= 5) {
@@ -65,6 +67,9 @@ class StampsAdapter(private var stampItem: List<StampItem>) :
         */
         holder.itemView.unLikeButton.setOnClickListener {
 //                if (mAuth.currentUser?.uid in stampItem.likedBy) {
+            it.unLikeButton.setBackgroundResource(R.drawable.ic_baseline_thumb_down_1_alt_30)
+            holder.itemView.likeButton.setBackgroundResource(R.drawable.ic_baseline_thumb_up_alt_30)
+//            it.likeButton.setBackgroundResource(R.drawable.ic_baseline_thumb_up_alt_30)
             val currStamp = stampItem.stampID.substring(0, stampItem.stampID.lastIndexOf("."))
             mRef.child(currStamp).child("rate").setValue(stampItem.rate - 1)
             if (stampItem.rate - 1 < 5) {
