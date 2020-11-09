@@ -181,7 +181,7 @@ public class UploadPhoto extends AppCompatActivity {
             File cacheFile;
             try {
                 cacheFile = File.createTempFile(CACHED_FILE_NAME, "", getCacheDir());
-                copy(filePath,cacheFile);
+                copy(filePath,cacheFile);   // Create a cache file
                 String cachePath = cacheFile.getAbsolutePath();
                 setPic(cachePath);
             } catch (IOException e) {
