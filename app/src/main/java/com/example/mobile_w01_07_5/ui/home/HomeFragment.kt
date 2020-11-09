@@ -29,7 +29,7 @@ import java.io.File
 
 
 /**
- * A simple [Fragment] subclass as the default destination in the navigation.
+ * A simple HomeFragment subclass as the default destination in the navigation.
  */
 class HomeFragment : Fragment() {
     var stampList: ArrayList<StampItem>? = null
@@ -68,6 +68,9 @@ class HomeFragment : Fragment() {
         latestItemInCart.text = textViewText
     }
 
+    /**
+     * Keep searching for changes asynchronously in the background
+     */
     override fun onResume() {
         super.onResume()
         viewModel.getStamps().observe(this, Observer { stamps ->
@@ -77,6 +80,9 @@ class HomeFragment : Fragment() {
     }
 }
 
+/**
+ * View Model to fetch LiveData dynamically without changing the whole feed layout
+ */
 class StampViewModel : ViewModel() {
     var stampsMutable: MutableLiveData<List<StampItem>> = MutableLiveData()
     var stampList = ArrayList<StampItem>()

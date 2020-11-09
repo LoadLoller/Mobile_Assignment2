@@ -75,6 +75,10 @@ class ProductInformationFragment : Fragment() {
 //        }
     }
 
+    /**
+     * Keep checking if new data or updated data comes out from the database and
+     * revise it
+     */
     override fun onResume() {
         super.onResume()
 
