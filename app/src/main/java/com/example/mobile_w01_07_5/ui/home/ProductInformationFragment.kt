@@ -3,29 +3,19 @@ package com.example.mobile_w01_07_5.ui.home
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.observe
-import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.mobile_w01_07_5.R
-import com.example.mobile_w01_07_5.data.CommentData
 import com.example.mobile_w01_07_5.data.StampItem
-import com.example.mobile_w01_07_5.ui.Adapters.CommentsAdapter
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
-import com.squareup.picasso.Picasso
 import com.thekhaeng.pushdownanim.PushDownAnim
 import kotlinx.android.synthetic.main.product_info.*
 
@@ -83,8 +73,7 @@ class ProductInformationFragment : Fragment() {
         super.onResume()
 
         viewModel.getStamps().observe(this, Observer { stamps ->
-            if(stamps != null) {
-                Log.d("----------||", stamps.toString())
+            if (stamps != null) {
                 for (stamp in stamps) {
                     if (stamp.stampID == stampViewID) {
                         productTitle.text = stamp.name
