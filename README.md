@@ -7,6 +7,8 @@
  - Use Build to build the project with Gradle
 
  - Use Virtual/Physical Machine to run the project
+ 
+ (Ensure your device sdk version is or higher than 29 to compile the project successfully)
 
 
  ## Demo:
