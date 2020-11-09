@@ -49,7 +49,8 @@ class StampsAdapter(private var stampItem: List<StampItem>) :
             holder.itemView.unLikeButton.setBackgroundResource(R.drawable.ic_baseline_thumb_down_alt_30)
 //            if (it.unLikeButton.cu != R.drawable.ic_baseline_thumb_down_alt_30)
 //            it.unLikeButton.setBackgroundResource(R.drawable.ic_baseline_thumb_down_alt_30)
-            val currStamp = stampItem.stampID.substring(0, stampItem.stampID.lastIndexOf("."))
+//            val currStamp = stampItem.stampID.substring(0, stampItem.stampID.lastIndexOf("."))
+            val currStamp = stampItem.stampID
             stampItem.rate += 1
             mRef.child(currStamp).child("rate").setValue(stampItem.rate)
             if (stampItem.rate >= 5) {
@@ -73,7 +74,8 @@ class StampsAdapter(private var stampItem: List<StampItem>) :
             it.unLikeButton.setBackgroundResource(R.drawable.ic_baseline_thumb_down_1_alt_30)
             holder.itemView.likeButton.setBackgroundResource(R.drawable.ic_baseline_thumb_up_alt_30)
 //            it.likeButton.setBackgroundResource(R.drawable.ic_baseline_thumb_up_alt_30)
-            val currStamp = stampItem.stampID.substring(0, stampItem.stampID.lastIndexOf("."))
+//            val currStamp = stampItem.stampID.substring(0, stampItem.stampID.lastIndexOf("."))
+            val currStamp = stampItem.stampID
             stampItem.rate -= 1
             mRef.child(currStamp).child("rate").setValue(stampItem.rate)
             if (stampItem.rate < 5) {
