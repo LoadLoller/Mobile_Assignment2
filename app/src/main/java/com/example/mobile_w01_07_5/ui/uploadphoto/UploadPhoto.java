@@ -22,7 +22,6 @@ import androidx.core.content.FileProvider;
 
 import com.example.mobile_w01_07_5.MainActivity;
 import com.example.mobile_w01_07_5.R;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -41,18 +40,14 @@ import java.util.Date;
 
 public class UploadPhoto extends AppCompatActivity {
 
-    private static final String TAG = "Photo app";
     private static final int PICK_IMAGE_REQUEST = 111;
     private static final int CAMERA_REQUEST = 101;
-
     private String currentPhotoPath;
 
-    // private static final WindowManager.LayoutParams LOGGER = ;
 
     Photohelper photo= new Photohelper();
     private double Latitude;
     private double Longitude;
-    private String time;
     Button choosePhoto, takephoto, uploadPhoto;
     ImageView imageView;
     TextView textView;
@@ -133,7 +128,11 @@ public class UploadPhoto extends AppCompatActivity {
         UploadTask uploadTask=childRef.putFile(filePath);
         uploadTask.addOnSuccessListener(taskSnapshot -> {
             pb.setVisibility(View.GONE);
-            Toast.makeText(UploadPhoto.this,"Upload successful",Toast.LENGTH_SHORT).show();
+            Toast.makeText(UploadPhoto.this,"Upload successful.",Toast.LENGTH_SHORT).show();
+        });
+        uploadTask.addOnFailureListener(taskSnapshot -> {
+            pb.setVisibility(View.GONE);
+            Toast.makeText(UploadPhoto.this,"Sorry,Upload filed.",Toast.LENGTH_SHORT).show();
         });
     }
 
