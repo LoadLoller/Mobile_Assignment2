@@ -62,6 +62,7 @@ public class PhotoAttrsUtil {
         LatLng latLng = new LatLng(getRationalLatLonToFloat(TAG_GPS_LATITUDE, TAG_GPS_LATITUDE_REF),
                 getRationalLatLonToFloat(TAG_GPS_LONGITUDE, TAG_GPS_LONGITUDE_REF));
 
+        //return the time, model, orientation and gps location
         return new PictureAttrs(TAG_DATETIME, TAG_MODEL,TAG_ORIENTATION, latLng.latitude, latLng.longitude, null);
     }
 

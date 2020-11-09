@@ -2,14 +2,14 @@
 
 ## Compile
 
- - Use Android Studio to open up the project
-
- - Use Build to build the project with Gradle
-
- - Use Virtual/Physical Machine to run the project
+ - Use Android Studio to open up the project.
  
- (Ensure your device sdk version is or higher than 29 to compile the project successfully)
+ - Check if your device sdk version is or higher than 29 to compile the project successfully.
 
+ - Use Build to build the project with Gradle.
+
+ - Use Virtual or Physical Machine to run the project.(Make sure you turn on your GPS service if you are using Physical Machine)
+ 
 
  ## Demo:
 

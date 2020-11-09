@@ -43,8 +43,6 @@ public class UploadPhoto extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 111;
     private static final int CAMERA_REQUEST = 101;
     private String currentPhotoPath;
-
-
     Photohelper photo= new Photohelper();
     private double Latitude;
     private double Longitude;
@@ -53,8 +51,6 @@ public class UploadPhoto extends AppCompatActivity {
     TextView textView;
     Uri filePath;
     private static final String CACHED_FILE_NAME ="cached_data";
-
-
     private ProgressBar pb;
     private StorageReference mStorageRef;
     private FirebaseAuth mAuth;
@@ -70,11 +66,8 @@ public class UploadPhoto extends AppCompatActivity {
         uploadPhoto = findViewById(R.id.uploadPhoto);
         imageView = findViewById(R.id.imageView);
         textView=findViewById(R.id.DescriptionText);
-
-
         pb = findViewById(R.id.progressBar_uploadphoto);
         pb.setVisibility(View.INVISIBLE);
-
 
         choosePhoto.setOnClickListener(view -> {
             Intent intent = new Intent();
@@ -120,21 +113,13 @@ public class UploadPhoto extends AppCompatActivity {
 
     }
 
-    private void uploadPhoto() {
-        String imageName=filePath.getPath();
-        int index = imageName.lastIndexOf("/");
-        imageName=imageName.substring(index+1);
-        StorageReference childRef=mStorageRef.child("images/"+imageName);
-        UploadTask uploadTask=childRef.putFile(filePath);
-        uploadTask.addOnSuccessListener(taskSnapshot -> {
-            pb.setVisibility(View.GONE);
-            Toast.makeText(UploadPhoto.this,"Upload successful.",Toast.LENGTH_SHORT).show();
-        });
-        uploadTask.addOnFailureListener(taskSnapshot -> {
-            pb.setVisibility(View.GONE);
-            Toast.makeText(UploadPhoto.this,"Sorry,Upload filed.",Toast.LENGTH_SHORT).show();
-        });
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(UploadPhoto.this, MainActivity.class);
+        startActivity(intent);
     }
+
 
     private void uploadPhotoAttrs() {
         String imageName=filePath.getPath();
@@ -165,12 +150,23 @@ public class UploadPhoto extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(UploadPhoto.this, MainActivity.class);
-        startActivity(intent);
+
+    private void uploadPhoto() {
+        String imageName=filePath.getPath();
+        int index = imageName.lastIndexOf("/");
+        imageName=imageName.substring(index+1);
+        StorageReference childRef=mStorageRef.child("images/"+imageName);
+        UploadTask uploadTask=childRef.putFile(filePath);
+        uploadTask.addOnSuccessListener(taskSnapshot -> {
+            pb.setVisibility(View.GONE);
+            Toast.makeText(UploadPhoto.this,"Upload successful.",Toast.LENGTH_SHORT).show();
+        });
+        uploadTask.addOnFailureListener(taskSnapshot -> {
+            pb.setVisibility(View.GONE);
+            Toast.makeText(UploadPhoto.this,"Sorry,Upload filed.",Toast.LENGTH_SHORT).show();
+        });
     }
+
 
 
     @Override
@@ -185,7 +181,7 @@ public class UploadPhoto extends AppCompatActivity {
             File cacheFile;
             try {
                 cacheFile = File.createTempFile(CACHED_FILE_NAME, "", getCacheDir());
-                copy(filePath,cacheFile);
+                copy(filePath,cacheFile);   // Create a cache file
                 String cachePath = cacheFile.getAbsolutePath();
                 setPic(cachePath);
             } catch (IOException e) {
@@ -239,24 +235,18 @@ public class UploadPhoto extends AppCompatActivity {
         // Get the dimensions of the View
         int targetW = imageView.getWidth();
         int targetH = imageView.getHeight();
-
         // Get the dimensions of the bitmap
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
         bmOptions.inJustDecodeBounds = true;
-
         BitmapFactory.decodeFile(currentPhotoPath, bmOptions);
-
         int photoW = bmOptions.outWidth;
         int photoH = bmOptions.outHeight;
-
         // Determine how much to scale down the image
         int scaleFactor = Math.max(1, Math.min(photoW/targetW, photoH/targetH));
-
         // Decode the image file into a Bitmap sized to fill the View
         bmOptions.inJustDecodeBounds = false;
         bmOptions.inSampleSize = scaleFactor;
         bmOptions.inPurgeable = true;
-
         Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath, bmOptions);
         Matrix matrix = new Matrix();
         matrix.setRotate(rotate);
@@ -266,7 +256,6 @@ public class UploadPhoto extends AppCompatActivity {
     }
 
     public void copy(Uri src, File dst) throws IOException {
-
         try (InputStream in = getContentResolver().openInputStream(src)) {
             try (OutputStream out = new FileOutputStream(dst)) {
                 // Transfer bytes from in to out

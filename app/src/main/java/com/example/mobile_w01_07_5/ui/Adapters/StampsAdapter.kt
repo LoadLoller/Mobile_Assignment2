@@ -1,12 +1,8 @@
 package com.example.mobile_w01_07_5.ui.Adapters
 
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -14,12 +10,13 @@ import com.bumptech.glide.Glide
 import com.example.mobile_w01_07_5.R
 import com.example.mobile_w01_07_5.data.StampItem
 import com.example.mobile_w01_07_5.ui.home.HomeFragmentDirections
-import com.example.mobile_w01_07_5.ui.home.ProductInformationFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.a_single_stamp_row.view.*
-import java.util.logging.Handler
 
+/**
+ * Adapter for Recycler View in the HomeFragment
+ */
 class StampsAdapter(private var stampItem: List<StampItem>) :
         RecyclerView.Adapter<StampsAdapter.ViewHolder>() {
     var mDatabase = FirebaseDatabase.getInstance()
@@ -29,11 +26,10 @@ class StampsAdapter(private var stampItem: List<StampItem>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.a_single_stamp_row, parent, false)
-//        this.notifyDataSetChanged()
         return ViewHolder(view)
     }
 
-    /*How many items there gonna be*/
+    /*How many items there is going to be*/
     override fun getItemCount() = stampItem.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -99,6 +95,9 @@ class StampsAdapter(private var stampItem: List<StampItem>) :
         }
     }
 
+    /**
+     * Check the adapter list with difference using DiffUtil function
+     */
     fun submitList(stampItemList: List<StampItem>) {
         val oldList = stampItem
         val diffResult: DiffUtil.DiffResult = DiffUtil.calculateDiff(
@@ -111,6 +110,9 @@ class StampsAdapter(private var stampItem: List<StampItem>) :
         diffResult.dispatchUpdatesTo(this)
     }
 
+    /**
+     * Difference Call Back from DiffUtil
+     */
     class StampItemDiffCallback(
             var oldStampItemList: List<StampItem>,
             var newStampItemList: List<StampItem>
@@ -132,6 +134,9 @@ class StampsAdapter(private var stampItem: List<StampItem>) :
         }
     }
 
+    /**
+     * Default View Holder for recycler view
+     */
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
         fun bind(stampItem: StampItem) {
