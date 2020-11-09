@@ -17,7 +17,7 @@ data class StampItem(
         val locationY: Double,
 //        val photo: String = R.drawable.yosemite1.toString(),
         val photo: Uri? = null,
-        val isHighlyRated: Boolean = false
+        var isHighlyRated: Boolean = false
 ) {
     override fun equals(other: Any?): Boolean {
         if (javaClass != other?.javaClass) {

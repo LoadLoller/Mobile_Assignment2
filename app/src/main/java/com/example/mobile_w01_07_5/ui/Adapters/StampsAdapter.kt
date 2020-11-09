@@ -50,15 +50,18 @@ class StampsAdapter(private var stampItem: List<StampItem>) :
 //            if (it.unLikeButton.cu != R.drawable.ic_baseline_thumb_down_alt_30)
 //            it.unLikeButton.setBackgroundResource(R.drawable.ic_baseline_thumb_down_alt_30)
             val currStamp = stampItem.stampID.substring(0, stampItem.stampID.lastIndexOf("."))
-            mRef.child(currStamp).child("rate").setValue(stampItem.rate + 1)
-            if (stampItem.rate + 1 >= 5) {
-                mRef.child(currStamp).child("highlyRated").setValue(true)
-            }
             stampItem.rate += 1
+            mRef.child(currStamp).child("rate").setValue(stampItem.rate)
+            if (stampItem.rate >= 5) {
+                mRef.child(currStamp).child("highlyRated").setValue(true)
+                stampItem.isHighlyRated = true
+            }
+            
             // add current user to the stamp database
 //                    stampItem.likedBy.add(mAuth.currentUser?.uid)
 //                    myRef.child(currStamp).child("likedBy").setValue(stampItem.likedBy)
 //                }
+            notifyItemChanged(position)
             notifyDataSetChanged()
         }
 
@@ -71,15 +74,18 @@ class StampsAdapter(private var stampItem: List<StampItem>) :
             holder.itemView.likeButton.setBackgroundResource(R.drawable.ic_baseline_thumb_up_alt_30)
 //            it.likeButton.setBackgroundResource(R.drawable.ic_baseline_thumb_up_alt_30)
             val currStamp = stampItem.stampID.substring(0, stampItem.stampID.lastIndexOf("."))
-            mRef.child(currStamp).child("rate").setValue(stampItem.rate - 1)
-            if (stampItem.rate - 1 < 5) {
-                mRef.child(currStamp).child("highlyRated").setValue(false)
-            }
             stampItem.rate -= 1
+            mRef.child(currStamp).child("rate").setValue(stampItem.rate)
+            if (stampItem.rate < 5) {
+                mRef.child(currStamp).child("highlyRated").setValue(false)
+                stampItem.isHighlyRated = false
+            }
+
             // delete current user to the stamp database
 //                    stampItem.likedBy.remove(mAuth.currentUser?.uid)
 //                    myRef.child(currStamp).child("likedBy").setValue(stampItem.likedBy)
 //                }
+            notifyItemChanged(position)
             notifyDataSetChanged()
         }
 
@@ -88,8 +94,6 @@ class StampsAdapter(private var stampItem: List<StampItem>) :
             val action =
                     HomeFragmentDirections.actionHomeFragmentToProductInfo(stampItem.stampID)
             holder.itemView.findNavController().navigate(action)
-            notifyDataSetChanged()
-
         }
     }
 
