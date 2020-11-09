@@ -34,10 +34,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
-    private FirebaseDatabase mDatabase;
-    private FloatingActionButton uploadPhoto;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,37 +41,16 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_feed, R.id.navigation_map, R.id.navigation_profile)
-                .build();
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.navigation_feed, R.id.navigation_map, R.id.navigation_profile).build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        mDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference mDatabaseReference= mDatabase.getReference("Stamps/stamp");
-
-
-        uploadPhoto=findViewById(R.id.UploadPhotoButton);
+        FloatingActionButton uploadPhoto = findViewById(R.id.UploadPhotoButton);
         uploadPhoto.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, UploadPhoto.class);
             startActivity(intent);
         });
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-//        https://github.com/firebase/quickstart-android/blob/adbb3cd0934f77a0338d4ba48be1eaad12cf3107/auth/app/src/main/java/com/google/firebase/quickstart/auth/java/AnonymousAuthActivity.java#L73-L79
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-
-        super.onActivityResult(requestCode,resultCode,data);
-
     }
 
 }
