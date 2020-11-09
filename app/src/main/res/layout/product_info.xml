@@ -29,7 +29,7 @@
             android:layout_height="267dp"
             android:contentDescription="TODO"
             android:scaleType="centerCrop"
-            android:src="@drawable/fresh_salad"
+            android:src="@drawable/not_available"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
