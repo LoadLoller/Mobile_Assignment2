@@ -160,7 +160,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback{
                     mMap.addMarker(new MarkerOptions()
                             .position(uni_postion)
                             .title("The_Dev_Team @ UniMelb")
-                            .snippet("Hi from University of Melbourne!"));
+                            .snippet("Hi from University of Melbourne!").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
                     LocationManager lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                     Location current_location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -214,7 +214,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback{
         mMap.addMarker(new MarkerOptions()
                 .position(uni_postion)
                 .title("The_Dev_Team @ UniMelb")
-                .snippet("Hi from University of Melbourne!"));
+                .snippet("Hi from University of Melbourne!").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
         // Add markers in the list
         for (int i = 0; i < stampList.size(); i++)
