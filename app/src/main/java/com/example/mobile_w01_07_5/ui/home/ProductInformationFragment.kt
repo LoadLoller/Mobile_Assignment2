@@ -67,14 +67,12 @@ class ProductInformationFragment : Fragment() {
         /*
         * Comments block
         */
-        val comments = CommentData().allComments()
-
-        commentRecyclerView.apply {
-            layoutManager = LinearLayoutManager(activity)
-            adapter = CommentsAdapter(comments)
-        }
-
-//        productTitle.text = productCode
+//        val comments = CommentData().allComments()
+//
+//        commentRecyclerView.apply {
+//            layoutManager = LinearLayoutManager(activity)
+//            adapter = CommentsAdapter(comments)
+//        }
     }
 
     override fun onResume() {
