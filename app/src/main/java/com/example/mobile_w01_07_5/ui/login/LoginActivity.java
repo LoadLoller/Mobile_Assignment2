@@ -17,6 +17,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
     private static final String debug_message = "from Login Activity: ";
@@ -94,6 +99,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             Toast.LENGTH_SHORT).show();
                     FirebaseUser user = mAuth.getCurrentUser();
                     updateUI(user);
+
+                    // Add new user to database
+                    String uid = user.getUid();
+                    String email = user.getEmail();
+                    createUserAttrs(uid, email);
                 }
                 else {
                     // sign in fails
@@ -252,5 +262,25 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             mBinding.emailPasswordFields.setVisibility(View.VISIBLE);
             mBinding.signedInButtons.setVisibility(View.GONE);
         }
+    }
+
+    private void createUserAttrs(String uid, String email){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users");
+        DatabaseReference myRef = reference.child(uid);
+
+        Map<String, Object> newProfile = new HashMap<String, Object>(){{
+            put("id",uid);
+            put("address","");
+            put("email",email);
+            put("followers","");
+            put("following","");
+            put("image","default.jpg");
+            put("name","");
+            put("phone","");
+            put("fb","");
+        }};
+
+        myRef.setValue(newProfile);
+
     }
 }
