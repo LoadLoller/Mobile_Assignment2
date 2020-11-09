@@ -158,8 +158,7 @@ public class UploadPhoto extends AppCompatActivity {
         }
         photo.setName(Name);
 
-        int new_index = imageName.lastIndexOf(".");
-        String title=imageName.substring(0,new_index);
+        String title=imageName;
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Stamps").child("stamp");
         DatabaseReference stampRef = myRef.child(title);
