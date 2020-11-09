@@ -1,29 +1,29 @@
 # Mobile_W01_07_5
 
-## Compile
+    ## Compile
 
- - Use Android Studio to open up the project
- 
- - Use Build to build the project with Gradle
- 
- - Use Virtual/Physical Machine to run the project
- 
- 
- ## Demo:
- 
-  - Check youtube via [Group_W01_07_5][project_demo]
-  
-  
-## Contributions:
+     - Use Android Studio to open up the project
 
-* Anqi Zhao
-* Haojun Dong
-* Jiale Zhang
-* Jin Chen
-* Junlu Zhou
-* Ning Han
-  
-### Project Main Page Can Be Found Here: [Mobile_W01_07_5][pj]
+     - Use Build to build the project with Gradle
+
+     - Use Virtual/Physical Machine to run the project
+
+
+     ## Demo:
+
+      - Check youtube via [Group_W01_07_5][project_demo]
+
+
+    ## Contributions:
+
+    * Anqi Zhao
+    * Haojun Dong
+    * Jiale Zhang
+    * Jin Chen
+    * Junlu Zhou
+    * Ning Han
+
+    ### Project Main Page Can Be Found Here: [Mobile_W01_07_5][pj]
   
   
   
