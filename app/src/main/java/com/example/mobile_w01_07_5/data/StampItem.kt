@@ -15,7 +15,6 @@ data class StampItem(
         val description: String,
         val locationX: Double,
         val locationY: Double,
-//        val photo: String = R.drawable.yosemite1.toString(),
         val photo: Uri? = null,
         var isHighlyRated: Boolean = false
 ) {

@@ -144,7 +144,6 @@ class StampsAdapter(private var stampItem: List<StampItem>) :
             itemView.stampRate.text = "Rate: ${stampItem.rate}"
             if (stampItem.rate > 5 || stampItem.isHighlyRated)
                 itemView.highlyRatedIcon.visibility = View.VISIBLE
-//            view.stampPhotoMain.setImageResource(Integer.parseInt(stampItem.photo))
             Glide.with(view.context).load(stampItem.photo).into(view.stampPhotoMain)
         }
     }
