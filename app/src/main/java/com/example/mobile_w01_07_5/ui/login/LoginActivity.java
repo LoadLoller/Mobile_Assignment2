@@ -272,8 +272,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             put("id",uid);
             put("address","");
             put("email",email);
-            put("followers","");
-            put("following","");
+            put("followers","0");
+            put("following","0");
             put("image","default.jpg");
             put("name","");
             put("phone","");
