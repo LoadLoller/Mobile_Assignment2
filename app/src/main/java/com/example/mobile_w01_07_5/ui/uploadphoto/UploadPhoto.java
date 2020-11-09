@@ -216,6 +216,9 @@ public class UploadPhoto extends AppCompatActivity {
         PhotoAttrsUtil.PictureAttrs photo = PhotoAttrsUtil.getPhotoAttrs(currentPhotoPath );
         Latitude=photo.getLatitude();
         Longitude=photo.getLongitude();
+        if(Latitude==0&&Longitude==0){
+            Toast.makeText(UploadPhoto.this,"GPS location not stored in this image.",Toast.LENGTH_SHORT).show();
+        }
         int orientation=Integer.parseInt(photo.getOrientation());
         int rotate;
         switch (orientation) {
