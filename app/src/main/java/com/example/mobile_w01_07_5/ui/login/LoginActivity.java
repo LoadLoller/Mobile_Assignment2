@@ -270,7 +270,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         Map<String, Object> newProfile = new HashMap<String, Object>(){{
             put("id",uid);
-            put("address","");
+            put("address","Default Address");
             put("email",email);
             put("followers","0");
             put("following","0");
