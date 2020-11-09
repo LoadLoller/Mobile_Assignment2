@@ -152,18 +152,17 @@ public class UploadPhoto extends AppCompatActivity {
         photo.setPhoto(imageName);
         if(currentUser!=null) {
             photo.setUserID(currentUser.getUid());
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            String title=currentUser.getUid()+timeStamp;
+            photo.setName(Name);
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference("Stamps").child("stamp");
+            DatabaseReference stampRef = myRef.child(title);
+            stampRef.setValue(photo);
         }
         else{
             Toast.makeText(UploadPhoto.this,"Uer does not exist.",Toast.LENGTH_SHORT).show();
         }
-        photo.setName(Name);
-
-        String title=imageName;
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Stamps").child("stamp");
-        DatabaseReference stampRef = myRef.child(title);
-
-        stampRef.setValue(photo);
     }
 
     @Override
