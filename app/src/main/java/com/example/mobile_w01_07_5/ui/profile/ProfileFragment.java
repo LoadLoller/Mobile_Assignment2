@@ -222,6 +222,7 @@ public class ProfileFragment extends Fragment {
                 // Detect if this is the first time the user set up the profile image
                 if (userImgStr.equals("default.jpg")){
                     mStorageRef = FirebaseStorage.getInstance().getReference().child("profiles/"+uid+".jpg");
+                    reference.child("image").setValue(uid+".jpg");
                 };
 
                 // Upload user's profile image
