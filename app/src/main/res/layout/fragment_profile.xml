@@ -220,16 +220,16 @@
 
             <Button
                 android:id="@+id/update"
-                android:layout_width="160dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
+                android:layout_marginRight="30dp"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:theme="@style/ThemeOverlay.MyDarkButton"
                 android:text="UPDATE"/>
 
             <Button
                 android:id="@+id/logout"
-                android:layout_width="160dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:theme="@style/ThemeOverlay.MyDarkButton"
                 android:text="Log Out"/>
