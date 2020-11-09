@@ -137,21 +137,24 @@ public class UploadPhoto extends AppCompatActivity {
     }
 
     private void uploadPhotoAttrs() {
+        String imageName=filePath.getPath();
+        int index = imageName.lastIndexOf("/");
+        imageName=imageName.substring(index+1);
         String desription = textView.getText().toString();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         TextView photoName = findViewById(R.id.PhotoName);
         String Name = photoName.getText().toString();
+        photo.setDescription(desription);
+        photo.setHighlyRated(false);
+        photo.setLocationX(Latitude);
+        photo.setLocationY(Longitude);
+        photo.setPhoto(imageName);
         if(currentUser!=null) {
-            photo.setDescription(desription);
-            photo.setHighlyRated(false);
-            photo.setLocationX(Latitude);
-            photo.setLocationY(Longitude);
             photo.setUserID(currentUser.getUid());
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
             String title=currentUser.getUid()+timeStamp;
             photo.setName(Name);
             photo.setStampID(title);
-            photo.setPhoto(title);
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference("Stamps").child("stamp");
             DatabaseReference stampRef = myRef.child(title);
