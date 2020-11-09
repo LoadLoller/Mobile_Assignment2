@@ -16,37 +16,21 @@ public class PhotoAttrsUtil {
         }
 
         String TAG_APERTURE = null;
-        //光圈值
         String TAG_DATETIME = null;
-        //拍照时间
         String TAG_EXPOSURE_TIME = null;
-        //曝光时间
         String TAG_FLASH = null;
-        //闪光灯
         String TAG_FOCAL_LENGTH = null;
-        //焦距
         String TAG_IMAGE_LENGTH = null;
-        //图片高度
         String TAG_IMAGE_WIDTH = null;
-        //图片宽度
         String TAG_ISO = null;
-        //ISO
         String TAG_MAKE = null;
-        //设备品牌
         String TAG_MODEL = null;
-        //设备型号，整形表示
         String TAG_ORIENTATION = null;
-        //旋转角度
         String TAG_WHITE_BALANCE = null;
-        //白平衡
         String TAG_GPS_LATITUDE_REF = null;
-        //纬度 [南S/北N]
         String TAG_GPS_LONGITUDE_REF = null;
-        //经度 [东E/西W]
         String TAG_GPS_LATITUDE = null;
-        //纬度
         String TAG_GPS_LONGITUDE = null;
-        //经度
 
 
         try {
@@ -81,7 +65,6 @@ public class PhotoAttrsUtil {
         return new PictureAttrs(TAG_DATETIME, TAG_MODEL,TAG_ORIENTATION, latLng.latitude, latLng.longitude, null);
     }
 
-    //将经纬度String转换成double
 
     private static double getRationalLatLonToFloat(String rationalString, String ref) {
 
@@ -110,10 +93,10 @@ public class PhotoAttrsUtil {
 
     public static class PictureAttrs {
         private String time;
-        private String model;//手机型号
-        private double latitude;//纬度
-        private double longitude;//经度
-        private String seaLevel;//海拔高度
+        private String model;
+        private double latitude;
+        private double longitude;
+        private String seaLevel;
         private String orientation;
 
         public PictureAttrs( String time,  String model,String orientation, double latitude, double longitude, String seaLevel) {
